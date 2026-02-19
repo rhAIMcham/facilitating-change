@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <title>Static table</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Drag and drop three column</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
-<style>
-:root {
+    <style>
+  :root {
     --AIMblue: #4353A3;
     --darkBlue: #38416D;
     --teal: #5DC8B9;
@@ -66,7 +67,65 @@ tr:nth-child(odd) {
 .high {
 background-color: orange;
 }
+.dropItem {
+    cursor: pointer;
+}
 
+
+    .modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    }
+
+    .modal-overlay.show {
+    display: flex;
+    }
+
+    .modal-content {
+    background: white;
+    padding: 40px;
+    border-radius: 12px;
+    max-width: 600px;
+    width: 90%;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+    }
+
+    .modal-content h2 {
+    color: var(--darkBlue);
+    margin-bottom: 20px;
+    font-size: 1.8em;
+    }
+
+    .modal-content p {
+    font-size: 1.1em;
+    line-height: 1.6;
+    color: #5e6c84;
+    margin-bottom: 10px;
+    }
+
+    .modal-close-btn {
+    margin-top: 20px;
+    padding: 12px 30px;
+    background: var(--AIMblue);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background 0.2s;
+    }
+
+    .modal-close-btn:hover {
+    background: var(--darkBlue);
+    }
 @media screen and (max-width: 700px) {
 
 table {
@@ -111,38 +170,130 @@ colgroup {
 }
 }
 
-</style>
-  </head>
+#div1, #div2, #div3, #div4, #div5 {
+  width: 150px;
+  height: 70px;
+  padding: 10px;
+}
+  </style>
+</head>
 <body>
+
 <table>
  <colgroup>
-        <col style="width: 20%;">
-        <col style="width: 20%;">
         <col style="width: 30%;">
         <col style="width: 30%;">
+        <col style="width: 40%;">
       </colgroup>
   <thead>
-    <th>titleOne</th>
-    <th>titleTwo</th>
-    <th>titleThree</th>
-    <th>titleFour</th>
+    <th>Barrier (what’s happening)</th>
+    <th>Likely cause (why it’s happening)</th>
+    <th>Leader response (what I will do)</th>
   </thead>
   <tbody>
-    <tr>
-        <td data-label="titleOne">
-        Content 1
-        </td>
-        <td data-label="titleTwo">
-            Content 2
-        </td>
-        <td data-label="titleThree">
-            Content 3
-        </td>
-        <td data-label="titleFour">
-            Content 4
-        </td>
-    </tr>
-  </tbody>
+<tr>
+<td>People are sceptical due to past failures</td>
+<td id="div1" ondrop="dropHandler(event)"   ondragover="dragoverHandler(event)"></td>
+<td>Acknowledge history, explain what’s different, show quick wins, and give visible sponsor/leader follow-through.</td>
+</tr>
+<tr>
+<td>Support requests spike and frustrate staff</td>
+<td id="div2" ondrop="dropHandler(event)"   ondragover="dragoverHandler(event)"></td>
+<td id="div3" ondrop="dropHandler(event)"   ondragover="dragoverHandler(event)"></td>
+</tr>
+<tr>
+<td>Cross-team handoffs break down</td>
+<td id="div4" ondrop="dropHandler(event)"   ondragover="dragoverHandler(event)"></td>
+<td id="div5" ondrop="dropHandler(event)"   ondragover="dragoverHandler(event)"></td>
+</tr>
+</tbody>
 </table>
+<div>
+    <button onclick="submit()">Submit</button>
+    <div class="modal-overlay" id="resultsModal">
+    <div class="modal-content">
+        <h2 id="modalTitle"></h2>
+        <div id="modalMessage"></div>
+        <button class="modal-close-btn" 
+        onclick="closeModal()">
+        Close</button>
+    </div>
+</div>
+</div>
+<br>
+
+<p class="dropItem" id="tr1" draggable="true" ondragstart="dragstartHandler(event)">Low trust + change fatigue</p>
+
+<p class="dropItem" id="tr2" draggable="true" ondragstart="dragstartHandler(event)">Support model not ready</p>
+
+<p class="dropItem" id="tr3" draggable="true" ondragstart="dragstartHandler(event)">Stand up hypercare (office hours, champions, rapid triage), improve self-serve guides, and track recurring issues daily.</p>
+
+<p class="dropItem" id="tr4" draggable="true" ondragstart="dragstartHandler(event)">Process ambiguity</p>
+
+<p class="dropItem" id="tr5" draggable="true" ondragstart="dragstartHandler(event)">Map the end-to-end workflow, define handoff standards, and agree service expectations between teams.</p>
+
+ 
+<script>
+// Define the correct answers: draggable ID -> drop zone ID
+const correctAnswers = {
+  "tr1": "div1",  // Low trust + change fatigue -> div1
+  "tr2": "div2",  // Support model not ready -> div2
+  "tr3": "div3",  // Stand up hypercare... -> div3
+  "tr4": "div4",  // Process ambiguity -> div4
+  "tr5": "div5",  // Map the end-to-end workflow... -> div5
+};
+
+// Track where things have been dropped
+const currentPlacements = {};
+
+function dragstartHandler(ev) {
+  ev.dataTransfer.setData("text", ev.target.id);
+}
+
+function dragoverHandler(ev) {
+  ev.preventDefault();
+}
+
+function dropHandler(ev) {
+  ev.preventDefault();
+  const draggedId = ev.dataTransfer.getData("text");
+  const dropZoneId = ev.currentTarget.id;
+  ev.currentTarget.appendChild(document.getElementById(draggedId));
+  currentPlacements[draggedId] = dropZoneId;
+}
+
+function submit() {
+  let allCorrect = true;
+
+  for (const [draggedId, correctZone] of Object.entries(correctAnswers)) {
+    const placedZone = currentPlacements[draggedId];
+    const draggedEl = document.getElementById(draggedId);
+    const zoneEl = document.getElementById(placedZone); 
+
+    if (placedZone === correctZone) {
+      draggedEl.style.border = '3px solid #0f7c2e';
+    } else {
+      draggedEl.style.backgroundColor = "salmon";
+      allCorrect = false;
+    }
+  }
+
+  if (allCorrect) {
+    showModal("All correct!");
+  } else {
+    showModal("Some answers are wrong — check the highlighted items.");
+  }
+}
+
+function showModal(title, message) {
+  document.getElementById('modalTitle').textContent = title;
+  document.getElementById('modalMessage').innerHTML = message || '';
+  document.getElementById('resultsModal').classList.add('show');
+}
+
+function closeModal() {
+  document.getElementById('resultsModal').classList.remove('show');
+}
+</script>
 </body>
 </html>
