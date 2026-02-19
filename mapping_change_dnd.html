@@ -193,17 +193,18 @@ colgroup {
 }
 }
 
-#div1, #div2, #div3, #div4, #div5 {
+#div1, #div2, #div3, #div4, #div5, #div6 {
   width: 150px;
   height: 70px;
   padding: 10px;
 }
 
 #dropSafe {
-    min-height: 150px;
+    min-height: 100px;
     display: flex;
     flex-wrap: wrap;
     margin: auto;
+     min-width: 80vw;
 }
   </style>
 </head>
@@ -211,44 +212,106 @@ colgroup {
 <div class="dragPen">
 <table>
  <colgroup>
-        <col style="width: 30%;">
+        <col style="width: 5%;">
+        <col style="width: 25%">
         <col style="width: 30%;">
         <col style="width: 40%;">
       </colgroup>
   <thead>
-    <th>Barrier (what’s happening)</th>
-    <th>Likely cause (why it’s happening)</th>
-    <th>Leader response (what I will do)</th>
+    <th></th>
+    <th>Current process</th>
+    <th>Future process</th>
+    <th>What will change</th>
   </thead>
   <tbody>
 <tr>
-<td>People are sceptical due to past failures</td>
+    <th rowspan="3">Start of shift / register set-up</th>
+<td>
+    Sign into register with shared/store login or basic staff code
+</td>
+<td>
+    Individual login (unique user ID + PIN/2FA), role-based access
+</td>
 <td id="div1" ondrop="dropHandler(event)"   ondragover="dragoverHandler(event)"></td>
-<td>Acknowledge history, explain what’s different, show quick wins, and give visible sponsor/leader follow-through.</td>
 </tr>
 <tr>
-<td>Support requests spike and frustrate staff</td>
+<td>
+    Float counted and recorded on the paper log
+</td>
+<td>
+    Float counted and entered into system (digital cash management)
+</td>
 <td id="div2" ondrop="dropHandler(event)"   ondragover="dragoverHandler(event)"></td>
+</tr>
+<tr>
+<td>
+Register is “ready” when drawer opens and receipt paper loaded
+</td>
+<td>
+System prompts confirmation steps (float, printer, device health, network)
+</td>
 <td id="div3" ondrop="dropHandler(event)"   ondragover="dragoverHandler(event)"></td>
 </tr>
+<!--Second Section-->
 <tr>
-<td>Cross-team handoffs break down</td>
+    <th rowspan="3">Standard sale (scan items + take payment)</th>
+<td>
+   Scan items, manual price adjustments sometimes made at register
+</td>
+<td>
+   Scan items; system pulls product info, promos, and tax automatically
+</td>
 <td id="div4" ondrop="dropHandler(event)"   ondragover="dragoverHandler(event)"></td>
+</tr>
+<tr>
+<td>
+   Discounts applied with a simple % button or manager code
+</td>
+<td>
+   Discounts/promo codes are controlled by rules (auto-applied where eligible)
+</td>
 <td id="div5" ondrop="dropHandler(event)"   ondragover="dragoverHandler(event)"></td>
+</tr>
+<tr>
+<td>
+Payment taken; receipt printed; basic customer details rarely captured
+</td>
+<td>
+Payment options expanded (tap, split tenders, gift cards, store credit)
+Customer profile/loyalty capture is prompted (email/phone), optional per policy
+</td>
+<td id="div6" ondrop="dropHandler(event)"   ondragover="dragoverHandler(event)"></td>
 </tr>
 </tbody>
 </table>
 <div class="dragPen">
     <div id="dropSafe" ondrop="dropHandler(event)" ondragover="dragoverHandler(event)">
-<p class="dropItem" id="tr1" draggable="true" ondragstart="dragstartHandler(event)">Low trust + change fatigue</p>
-<p class="dropItem" id="tr4" draggable="true" ondragstart="dragstartHandler(event)">Process ambiguity</p>
-
-<p class="dropItem" id="tr2" draggable="true" ondragstart="dragstartHandler(event)">Support model not ready</p>
-<p class="dropItem" id="tr5" draggable="true" ondragstart="dragstartHandler(event)">Map the end-to-end workflow, define handoff standards, and agree service expectations between teams.</p>
-
-
-<p class="dropItem" id="tr3" draggable="true" ondragstart="dragstartHandler(event)">Stand up hypercare (office hours, champions, rapid triage), improve self-serve guides, and track recurring issues daily.</p>
- </div></div>
+<p class="dropItem" id="tr1" draggable="true" ondragstart="dragstartHandler(event)">
+   More consistent start-up steps and audit trail. More accountability tied to individual logins.
+New task: digital opening declaration. 
+</p>
+<p class="dropItem" id="tr4" draggable="true" ondragstart="dragstartHandler(event)">
+    Fewer “ad hoc” manual price changes; more rule-based pricing
+Increased focus on accuracy (less “workarounds”)
+</p>
+<p class="dropItem" id="tr2" draggable="true" ondragstart="dragstartHandler(event)">
+    Less manual recording, more on-screen prompts
+New task: accurate float entered into the system.
+</p>
+<p class="dropItem" id="tr5" draggable="true" ondragstart="dragstartHandler(event)">
+    Assistants’ ability to override price/discount is limited to policy thresholds. Higher-value overrides require supervisor approval within the system 
+New task: confirm promo eligibility prompts and capture customer details where appropriate
+</p>
+<p class="dropItem" id="tr3" draggable="true" ondragstart="dragstartHandler(event)">
+    Overrides restricted to supervisor/manager
+New task: confirm each system step 
+</p>
+<p class="dropItem" id="tr6" draggable="true" ondragstart="dragstartHandler(event)">
+   Faster checkout once fluent, but initially slower while learning
+New task: complete prompts and steps (especially for loyalty, warranties, add-ons)
+</p>
+ </div>
+</div>
  </div>
 <div>
     <button id="submitBtn" onclick="submit()">Submit</button>
@@ -273,6 +336,7 @@ const correctAnswers = {
   "tr3": "div3",  // Stand up hypercare... -> div3
   "tr4": "div4",  // Process ambiguity -> div4
   "tr5": "div5",  // Map the end-to-end workflow... -> div5
+  "tr6": "div6",
 };
 
 // Track where things have been dropped
