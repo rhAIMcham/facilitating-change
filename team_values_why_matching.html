@@ -52,13 +52,14 @@
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     min-width: 600px;
     }
-
+/* 
     .column {
-    flex: 1;
+    flex: 3;
     }
+
     .column:last-of-type {
-        flex: 2;
-    }
+        flex: 4;
+    } */
 
     .column-header {
     font-weight: 600;
@@ -325,23 +326,23 @@
         <div class="matching-area">
             <!-- Static Answer Column -->
             <div class="column">
-                <div class="column-header">Response</div>
+                <div class="column-header">Team values</div>
                 <div class="items-list">
-                    <div class="static-item">Initial shock or resistance</div>
-                    <div class="static-item">Sense of loss</div>
-                    <div class="static-item">Fear and uncertainty</div>
-                    <div class="static-item">"Change fatigue"</div>
+                    <div class="static-item"><strong>Impact:</strong> We value making a tangible difference by driving growth and helping customers succeed through the solutions we provide.</div>
+                    <div class="static-item"><strong>Service:</strong> We value creating a dependable, positive experience by responding quickly, listening well, and resolving issues with care.</div>
+                    <div class="static-item"><strong>Quality:</strong> We value excellence in learning by designing rigorous, engaging courses that genuinely support student success.</div>
+                    <div class="static-item"><strong>Outcomes:</strong> We value delivering trusted journalism by publishing accurate, credible stories that inform the public and earn reader confidence.</div>
                 </div>
             </div>
 
             <!-- Draggable/Reorderable Column -->
             <div class="column">
-                <div class="column-header">Description</div>
+                <div class="column-header">Why statement</div>
                 <div class="items-list" id="answerList">
-                    <div class="draggable-item" draggable="true" data-id="item2" role="button" aria-grabbed="false" tabindex="0">Employees may feel they have lost familiar processes, colleagues or status.</div>
-                    <div class="draggable-item" draggable="true" data-id="item4" role="button" aria-grabbed="false" tabindex="0">Constant, high-frequency change can lead to burnout, disengagement and cynicism. </div>
-                    <div class="draggable-item" draggable="true" data-id="item3" role="button" aria-grabbed="false" tabindex="0">Lack of information can drive concerns regarding job security or the ability to adapt to new ways.</div>
-                    <div class="draggable-item" draggable="true" data-id="item1" role="button" aria-grabbed="false" tabindex="0">Humans are creatures of habit, leading to a natural, initial resistance to changes in routine.</div>
+                    <div class="draggable-item" draggable="true" data-id="item3" role="button" aria-grabbed="false" tabindex="0">“We’re changing our course design approach so subjects are better structured, learning activities are more engaging, and students experience consistent quality across units.”</div>
+                    <div class="draggable-item" draggable="true" data-id="item4" role="button" aria-grabbed="false" tabindex="0">“We’re changing our editorial workflow so every story is fact-checked consistently, sources are verified, and corrections are handled transparently - protecting trust in our reporting.” </div>
+                    <div class="draggable-item" draggable="true" data-id="item1" role="button" aria-grabbed="false" tabindex="0">“We’re changing our lead management and handover process so we spend more time with high-potential customers, follow up faster and convert more opportunities.”</div>
+                    <div class="draggable-item" draggable="true" data-id="item2" role="button" aria-grabbed="false" tabindex="0">“We’re changing our support model so customers get quicker responses, clearer ownership, and a consistent experience across every channel.”</div>
                 </div>
             </div>
         </div>
@@ -606,7 +607,7 @@ function checkAnswers() {
 
     // Display results
     if (correctCount === correctOrder.length) {
-        showModal('<p>All items are correctly matched in the right order!</p>');
+        showModal('Perfect! 🎉', '<p>All items are correctly matched in the right order!</p>');
         announceToScreenReader('Perfect! All items are correctly matched in the right order!');
     } else {
         const percentage = Math.round((correctCount / correctOrder.length) * 100);
