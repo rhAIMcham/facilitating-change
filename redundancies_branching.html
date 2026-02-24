@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta lang="en">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+<title>Pressure Triggers Quiz</title>
+<style>
+    .checkContainer {
+        display: flex;
+        align-items: center;
+        margin: 15px 0;
+    }
+    
+    :root {
+        --AIMblue: #4353A3;
+        --darkBlue: #38416D;
+        --teal: #5DC8B9;
+        --cream: #F1EEDE;
+        --grey: #e7e9ec;
+        --rust: #AF4510;
+        --navy: #12195C;
+        --white: #ffffff;
+        --lightBlue: #AEBAE4;
+    }
+
+    body {
+        font-family: "IBM Plex Sans", sans-serif;
+        margin: 0;
+        padding: 20px;
+    }
+
+    .quiz-container {
+        max-width: 800px;
+        margin: 0 auto;
+        background-color: #F1EEDE30;
+        border-radius: 12px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+    }
+
+    .intro-section {
+        padding: 30px;
+        background-color: var(--cream);
+        text-align: center;
+    }
+
+    .intro-section h1 {
+        color: var(--AIMblue);
+        margin-bottom: 15px;
+    }
+
+    .intro-section p {
+        line-height: 1.6;
+        color: var(--darkBlue);
+    }
+
+    .slide-container {
+        padding: 30px;
+        padding-top: 15px;
+    }
+
+    .slide {
+        display: none;
+        width: 100%;
+    }
+
+    .slide.active {
+        display: block;
+    }
+
+    .slide h3 {
+        color: var(--AIMblue);
+        margin-bottom: 25px;
+        text-align: left;
+    }
+
+    fieldset {
+        border: none;
+        margin: 0;
+        padding: 0;
+    }
+    
+    .checkContainer {
+        display: flex;
+        align-items: flex-start;
+        margin: 20px 0;
+        padding: 15px;
+        background-color: var(--grey);
+        border-radius: 8px;
+    }
+
+    .instructions {
+        display: flex;
+        padding-left: 30px;
+    }
+
+    .checkContainer p {
+        margin: 0;
+        margin-right: 15px;
+        flex-grow: 1;
+        font-size: 16px;
+        line-height: 1.4;
+    }
+
+    input[type="radio"] {
+        margin: 0;
+        transform: scale(1.2);
+        cursor: pointer;
+    }
+
+    .navigation {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        padding: 20px 30px;
+        background-color: var(--grey);
+    }
+
+    .nav-buttons {
+        display: flex;
+        gap: 10px;
+    }
+
+    .nav-button {
+        width: 40px;
+        height: 40px;
+        border: 2px solid var(--AIMblue);
+        background-color: var(--white);
+        color: var(--AIMblue);
+        border-radius: 50%;
+        cursor: pointer;
+        font-weight: bold;
+        transition: all 0.3s ease;
+    }
+
+    .nav-button:hover {
+        background-color: var(--lightBlue);
+    }
+
+    .nav-button.active {
+        background-color: var(--AIMblue);
+        color: var(--white);
+    }
+
+    .arrow-button {
+        padding: 10px 20px;
+        background-color: #5DC8B990;
+        color: black;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s ease;
+    }
+
+    .arrow-button:hover:not(:disabled) {
+        background-color: var(--darkBlue);
+        color: white;
+    }
+
+    .arrow-button:disabled {
+        background-color: #ccc;
+        cursor: not-allowed;
+    }
+
+    .submit-button {
+        padding: 15px 30px;
+        background-color: var(--teal);
+        color: var(--white);
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 18px;
+        font-weight: bold;
+        margin: 20px auto;
+        display: none;
+    }
+
+    .submit-button:hover {
+        background-color: #4db5a5;
+    }
+
+    .submit-button:disabled {
+        background-color: #ccc;
+        cursor: not-allowed;
+        opacity: 0.6;
+    }
+
+    #results {
+        max-width: 800px;
+        margin: 15px auto;
+        background-color: var(--cream);
+        border-radius: 12px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        display: none;
+        padding: 30px;
+    }
+
+    #results h2 {
+        color: var(--AIMblue);
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    #results h3 {
+        color: var(--darkBlue);
+        margin-top: 25px;
+        margin-bottom: 10px;
+    }
+
+    #results p, #results ul {
+        line-height: 1.6;
+        color: var(--darkBlue);
+    }
+
+    #results ul {
+        padding-left: 20px;
+    }
+
+    #results li {
+        margin-bottom: 8px;
+    }
+
+    .chart-container {
+        max-width: 400px;
+        margin: 30px auto;
+        padding: 20px;
+    }
+
+    .progress-bar {
+        height: 6px;
+        background-color: var(--grey);
+        margin: 0 30px 20px;
+        border-radius: 3px;
+        overflow: hidden;
+    }
+
+    .progress-fill {
+        height: 100%;
+        background-color: var(--teal);
+        transition: width 0.3s ease;
+        width: 10%;
+    }
+
+    @media screen and (max-width: 600px) {
+        .quiz-container {
+            margin: 0;
+        }
+
+        .slide-container,
+        .navigation,
+        .instructions,
+        .intro-section {
+            padding: 15px;
+        }
+
+        .nav-buttons {
+            gap: 5px;
+        }
+
+        .nav-button {
+            width: 35px;
+            height: 35px;
+            font-size: 14px;
+        }
+
+        .arrow-button {
+            padding: 8px 12px;
+            font-size: 14px;
+        }
+    }
+</style>
+</head>
+<body>
+    <div class="quiz-container">
+        <!-- <div class="intro-section">
+            <h1>Pressure Triggers Quiz</h1>
+            <p>To begin to understand which of these four common triggers might affect you most under pressure, take this quiz. Each question has four options. Choose the option that best reflects what you most often do under pressure (not what you wish you did).</p>
+        </div> -->
+        
+        <nav class="navigation" aria-label="Quiz navigation">
+            <div class="nav-buttons" role="tablist">
+                <button class="nav-button active" onclick="goToSlide(1)" role="tab" aria-selected="true" aria-controls="slide-1" id="tab-1" aria-label="Question 1">1</button>
+                <button class="nav-button" onclick="goToSlide(2)" role="tab" aria-selected="false" aria-controls="slide-2" id="tab-2" aria-label="Question 2">2</button>
+                <button class="nav-button" onclick="goToSlide(3)" role="tab" aria-selected="false" aria-controls="slide-3" id="tab-3" aria-label="Question 3">3</button>
+                <button class="nav-button" onclick="goToSlide(4)" role="tab" aria-selected="false" aria-controls="slide-4" id="tab-4" aria-label="Question 4">4</button>
+            </div>
+        </nav>
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill" role="progressbar"></div>
+        </div>
+        <form name="q1" onsubmit="return false" onchange="updateSubmitButton()">
+            <div class="slide-container" id="slideContainer" role="region" aria-live="polite">
+                <!-- Slide 1 -->
+                <fieldset class="slide active" id="slide-1" role="tabpanel" aria-labelledby="tab-1">
+                    <legend>
+                        <h3>“Is it true there will be redundancies? Tell us exactly what’s happening and who it affects.”</h3>
+                        <p>Decision point 1: Your immediate response in the meeting</p>
+                    </legend>
+                    
+                    <div class="checkContainer">
+                        <p>
+                            <label for="q1-a">“Honestly, I can’t talk about that. Let’s not get into rumours - can we move on?”</label>
+                        </p>
+                        <input type="radio" id="q1-a" name="question1" value="a" autocomplete="off">
+                    </div>
+                    
+                    <div class="checkContainer">
+                        <p>
+                            <label for="q1-b">“I hear the concern, Sam and it makes sense you’re asking. I can’t share specific board-confidential details, but I can tell you what I know I’m allowed to share today, what I don’t know yet, and when you’ll hear more.”</label>
+                        </p>
+                        <input type="radio" id="q1-b" name="question1" value="b" autocomplete="off">
+                    </div>
+                </fieldset>
+
+                <!-- Slide 2 -->
+                <fieldset class="slide" id="slide-2" role="tabpanel" aria-labelledby="tab-2">
+                    <legend>
+                        <h3>Sam follows up: “That sounds like a dodge. Do you know who’s on the list?”</h3>
+                        <p>Decision point 2: They push for specifics</p>
+                    </legend>
+                    
+                    <div class="checkContainer">
+                        <p>
+                            <label for="q2-a">“I’m not dodging, Sam. If you keep pushing, I’ll have to shut this down.”</label>
+                        </p>
+                        <input type="radio" id="q2-a" name="question2" value="a" autocomplete="off">
+                    </div>
+                    
+                    <div class="checkContainer">
+                        <p>
+                            <label for="q2-b">“I get why it could feel that way. I’m not able to discuss individuals or numbers - that would be unfair and breach confidentiality. What I can do is explain the process that’s been set and what support will be available, and I’ll answer any questions about impacts we can plan for now.”</label>
+                        </p>
+                        <input type="radio" id="q2-b" name="question2" value="b" autocomplete="off">
+                    </div>
+                </fieldset>
+
+                <!-- Slide 3 -->
+                <fieldset class="slide" id="slide-3" role="tabpanel" aria-labelledby="tab-3">
+                    <legend>
+                        <h3>Another team member, Leila, says: “So you do know and you’re just not telling us. Why should we trust leadership?”</h3>
+                        <p>Decision point 3: The team reaction spreads</p>
+                    </legend>
+                    
+                    <div class="checkContainer">
+                        <p>
+                            <label for="q3-a">“You’re overreacting. This is exactly why rumours get out of hand.”</label>
+                        </p>
+                        <input type="radio" id="q3-a" name="question3" value="a" autocomplete="off">
+                    </div>
+                    
+                    <div class="checkContainer">
+                        <p>
+                            <label for="q3-b">“Trust is earned and I can see why this feels unsettling. Here’s my commitment: I won’t speculate, I won’t mislead you and I’ll share what I’m permitted to share as soon as I can. In the meantime, let’s capture the key uncertainties you’re worried about so I can take them to the next update and come back with answers.”</label>
+                        </p>
+                        <input type="radio" id="q3-b" name="question3" value="b" autocomplete="off">
+                    </div>
+                    
+                </fieldset>
+
+                <!-- Slide 4 -->
+                <fieldset class="slide" id="slide-4" role="tabpanel" aria-labelledby="tab-4">
+                    <legend>
+                        <h3>The meeting is nearly over. The group is still anxious and distracted.</h3>
+                        <p>Decision point 4: Closing the meeting and next steps</p>
+                    </legend>
+                    
+                    <div class="checkContainer">
+                        <p>
+                            <label for="q4-a">“Look, there’s nothing more to say. Just focus on your work and we’ll see what happens.”</label>
+                        </p>
+                        <input type="radio" id="q4-a" name="question4" value="a" autocomplete="off">
+                    </div>
+                    
+                    <div class="checkContainer">
+                        <p>
+                            <label for="q4-b">“Before we wrap up: here’s what’s certain today, what’s not confirmed, and what I can’t discuss. I’ll schedule a 15-minute check-in on Friday to share any updates and address questions I can. If anyone wants to talk privately, I’m available after this meeting - especially if this is affecting how you’re coping or prioritising your work.”</label>
+                        </p>
+                        <input type="radio" id="q4-b" name="question4" value="b" autocomplete="off">
+                    </div>
+                        <button class="submit-button" id="submitButton" onclick="formOne()" aria-label="Submit quiz and view results">
+                        Submit & View Results
+                    </button>
+                </fieldset>
+        </form>
+
+        <nav class="navigation" aria-label="Quiz navigation">
+            <button class="arrow-button" id="prevBtn" onclick="previousSlide()" aria-label="Previous question">
+                ← Previous
+            </button>
+            
+            <button class="arrow-button" id="nextBtn" onclick="nextSlide()" aria-label="Next question">
+                Next →
+            </button>
+        </nav>
+    </div>
+
+    <!-- Results Display -->
+    <div id="results" role="region" aria-live="polite" aria-label="Quiz results"></div>
+    <div id="modal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:100; align-items:center; justify-content:center;">
+  <div style="background:white; border-radius:12px; padding:30px; max-width:500px; margin:20px; font-family:'IBM Plex Sans',sans-serif;">
+    <h3 id="modal-title" style="color:#4353A3; margin-top:0;"></h3>
+    <p id="modal-body" style="color:#38416D; line-height:1.6;"></p>
+    <button onclick="closeModal()" style="padding:10px 20px; background:#5DC8B9; color:white; border:none; border-radius:6px; cursor:pointer; font-size:16px;">
+      Continue →
+    </button>
+  </div>
+</div>
+</body>
+<script>
+let currentSlide = 1;
+const totalSlides = 4;
+
+const slideContext = {
+  1: {
+    a: { title: "Worsening morale", body: "The room goes tense. People read “avoidance” as “it’s true.” Side chats increase." },
+    b: { title: "Improving morale", body: "The room settles slightly. People feel heard, and you signal transparency within limits." }
+  },
+  2: {
+    a: { title: "Worsening morale", body: "You look defensive; Sam looks “in trouble.” Psychological safety drops." },
+    b: { title: "Improving morale", body: "You hold a firm boundary and keep trust: fairness, process clarity and support." }
+  },
+  3: {
+    a: { title: "Worsening morale", body: "Emotions escalate; people feel dismissed. Engagement drops and resentment grows."},
+    b: { title: "Improving morale", body: "You acknowledge the emotion, make a credibility pledge, and create a clear channel for questions."}
+  },
+    4: {
+    a: { title: "Worsening morale", body: "People leave anxious and fill the vacuum with rumours. Credibility declines."},
+    b: { title: "Improving morale", body: "You replace uncertainty with structure: clarity, a timeline and support - reducing rumour fuel."}
+  }
+};
+
+function goToSlide(slideNumber) {
+    const slides = document.querySelectorAll('.slide');
+    slides.forEach(slide => slide.classList.remove('active'));
+    
+    document.getElementById(`slide-${slideNumber}`).classList.add('active');
+    
+    currentSlide = slideNumber;
+    updateButtons();
+    updateArrowButtons();
+    updateProgressBar();
+    updateSubmitButton();
+}
+
+function nextSlide() {
+  if (currentSlide < totalSlides) {
+    const form = document.forms['q1'];
+    const answer = form.elements[`question${currentSlide}`]?.value;
+
+    if (answer && slideContext[currentSlide]?.[answer]) {
+      const ctx = slideContext[currentSlide][answer];
+      document.getElementById('modal-title').textContent = ctx.title;
+      document.getElementById('modal-body').textContent = ctx.body;
+      document.getElementById('modal').style.display = 'flex';
+    } else {
+      goToSlide(currentSlide + 1); // no answer selected, just advance
+    }
+  }
+}
+
+function closeModal() {
+  document.getElementById('modal').style.display = 'none';
+  goToSlide(currentSlide + 1);
+}
+
+function previousSlide() {
+    if (currentSlide > 1) {
+        goToSlide(currentSlide - 1);
+    }
+}
+
+function updateButtons() {
+    const buttons = document.querySelectorAll('.nav-button');
+    buttons.forEach((btn, index) => {
+        btn.classList.remove('active');
+        btn.setAttribute('aria-selected', 'false');
+        if (index === currentSlide - 1) {
+            btn.classList.add('active');
+            btn.setAttribute('aria-selected', 'true');
+        }
+    });
+}
+
+function updateArrowButtons() {
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    
+    prevBtn.disabled = currentSlide === 1;
+    nextBtn.disabled = currentSlide === totalSlides;
+}
+
+function updateProgressBar() {
+    const progressFill = document.getElementById('progressFill');
+    const progress = (currentSlide / totalSlides) * 100;
+    progressFill.style.width = `${progress}%`;
+}
+
+function updateSubmitButton() {
+    const submitButton = document.getElementById('submitButton');
+    if (currentSlide === totalSlides) {
+        submitButton.style.display = 'block';
+        
+        // Check if all questions are answered
+        const form = document.forms['q1'];
+        let answeredCount = 0;
+        
+        for (let i = 1; i <= 4; i++) {
+            const question = form.elements[`question${i}`];
+            if (question && question.value) {
+                answeredCount++;
+            }
+        }
+        
+        // Enable button only if all 10 questions are answered
+        submitButton.disabled = answeredCount !== 4;
+    } else {
+        submitButton.style.display = 'none';
+    }
+}
+
+function formOne() {
+    const form = document.forms['q1'];
+    let aCount = 0;
+    let bCount = 0;
+    
+    for (let i = 1; i <= 4; i++) {
+        const question = form.elements[`question${i}`];
+        if (question && question.value) {
+            if (question.value === 'a') aCount++;
+            else if (question.value === 'b') bCount++;
+        }
+    }
+    
+    // Don't submit if not all questions are answered
+    const totalAnswered = aCount + bCount;
+    if (totalAnswered !== 4) {
+        return false;
+    }
+   
+    const results = document.getElementById("results");
+    results.style.display = "block";
+    
+    let maxCount = Math.max(aCount, bCount);
+    
+    // Check for ties
+    const tiedItems = [];
+    if (aCount === maxCount) tiedItems.push('a');
+    if (bCount === maxCount) tiedItems.push('b');
+    
+    // Style descriptions
+    const styles = {
+        'a': {
+            title: 'Choices worsened situation',
+            description: 'People interpret boundaries as avoidance or secrecy. Rumours intensify, trust erodes, and meeting focus collapses.'
+        },
+        'b': {
+            title: 'Choices improved situation',
+            description: 'You maintain credibility by being transparent about limits. You build trust through empathy, fairness, process clarity, and reliable follow-up.'
+        }
+    };
+    
+    if (maxCount < 1) {
+        results.innerHTML = `<h2>Incomplete Quiz</h2><p>Please complete the quiz before submitting. Make sure you've answered all questions.</p>`;
+    }
+    else if (tiedItems.length > 1) {
+        let tieHTML = '<h2>Mixed response style</h2><p>You have a mixed response across stress responses:</p>';
+        tiedItems.forEach(item => {
+            tieHTML += `<h3>${styles[item].title}</h3><p>${styles[item].description}</p>`;
+        });
+        results.innerHTML = tieHTML;
+    }
+    else if (maxCount === aCount) {
+        results.innerHTML = `<h2>${styles['a'].title}</h2><p>${styles['a'].description}</p>`;
+    }
+    else {
+        results.innerHTML = `<h2>${styles['b'].title}</h2><p>${styles['b'].description}</p>`;
+    }
+    
+    results.scrollIntoView({ behavior: 'smooth' });
+}
+
+document.addEventListener('keydown', function(event) {
+    if (event.target.tagName === 'INPUT') {
+        // Prevent Enter key from submitting the form
+        if (event.key === 'Enter') {
+            event.preventDefault();
+            return;
+        }
+        return;
+    }
+    
+    if (event.key === 'ArrowLeft') {
+        event.preventDefault();
+        previousSlide();
+    } else if (event.key === 'ArrowRight') {
+        event.preventDefault();
+        nextSlide();
+    }
+});
+
+updateArrowButtons();
+updateProgressBar();
+updateSubmitButton();
+</script>
+</html
