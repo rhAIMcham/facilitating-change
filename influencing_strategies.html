@@ -52,14 +52,14 @@
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     min-width: 600px;
     }
-/* 
+
     .column {
-    flex: 3;
+    flex: 1;
     }
 
     .column:last-of-type {
         flex: 4;
-    } */
+    } 
 
     .column-header {
     font-weight: 600;
@@ -86,7 +86,7 @@
     font-weight: 500;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     border: solid 2px var(--lightBlue);
-    min-height: 96px;
+    min-height: 120px;
     }
 
     .draggable-item {
@@ -99,7 +99,7 @@
     transition: transform 0.3s ease, box-shadow 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
     font-size: 1em;
     position: relative;
-    min-height: 96px;
+    min-height: 120px;
     }
 
     .draggable-item:hover {
@@ -326,23 +326,21 @@
         <div class="matching-area">
             <!-- Static Answer Column -->
             <div class="column">
-                <div class="column-header">Team values</div>
+                <div class="column-header">Strategy</div>
                 <div class="items-list">
-                    <div class="static-item"><strong>Impact:</strong> We value making a tangible difference by driving growth and helping customers succeed through the solutions we provide.</div>
-                    <div class="static-item"><strong>Service:</strong> We value creating a dependable, positive experience by responding quickly, listening well, and resolving issues with care.</div>
-                    <div class="static-item"><strong>Quality:</strong> We value excellence in learning by designing rigorous, engaging courses that genuinely support student success.</div>
-                    <div class="static-item"><strong>Outcomes:</strong> We value delivering trusted journalism by publishing accurate, credible stories that inform the public and earn reader confidence.</div>
+                    <div class="static-item">Influencing</div>
+                    <div class="static-item">Mentoring</div>
+                    <div class="static-item">Motivating</div>
                 </div>
             </div>
 
             <!-- Draggable/Reorderable Column -->
             <div class="column">
-                <div class="column-header">Why statement</div>
+                <div class="column-header">Definition</div>
                 <div class="items-list" id="answerList">
-                    <div class="draggable-item" draggable="true" data-id="item3" role="button" aria-grabbed="false" tabindex="0">“We’re changing our course design approach so subjects are better structured, learning activities are more engaging, and students experience consistent quality across units.”</div>
-                    <div class="draggable-item" draggable="true" data-id="item4" role="button" aria-grabbed="false" tabindex="0">“We’re changing our editorial workflow so every story is fact-checked consistently, sources are verified, and corrections are handled transparently - protecting trust in our reporting.” </div>
-                    <div class="draggable-item" draggable="true" data-id="item1" role="button" aria-grabbed="false" tabindex="0">“We’re changing our lead management and handover process so we spend more time with high-potential customers, follow up faster and convert more opportunities.”</div>
-                    <div class="draggable-item" draggable="true" data-id="item2" role="button" aria-grabbed="false" tabindex="0">“We’re changing our support model so customers get quicker responses, clearer ownership, and a consistent experience across every channel.”</div>
+                    <div class="draggable-item" draggable="true" data-id="item3" role="button" aria-grabbed="false" tabindex="0">Energising action in the present: you create the conditions that increase commitment and effort - clear purpose, ownership, autonomy, support and recognition - so people want to engage and follow through.</div>
+                    <div class="draggable-item" draggable="true" data-id="item1" role="button" aria-grabbed="false" tabindex="0">Helping others shift thinking or behaviour without relying on authority or “selling” but instead by shaping the conditions for buy-in (building trust and credibility, connecting to what people care about, using peer and social proof, offering real choices and removing barriers) so people choose to commit.</div>
+                    <div class="draggable-item" draggable="true" data-id="item2" role="button" aria-grabbed="false" tabindex="0">A relationship and development approach to helping someone grow over time by sharing experience, offering guidance, feedback, perspective and opportunities to build capability and confidence.</div>
                 </div>
             </div>
         </div>
@@ -366,7 +364,7 @@ let draggedItem = null;
 let keyboardGrabbedItem = null;
 
 // Correct answer order
-const correctOrder = ['item1', 'item2', 'item3', 'item4'];
+const correctOrder = ['item1', 'item2', 'item3'];
 
 function initDragAndDrop() {
     const items = document.querySelectorAll('.draggable-item');
