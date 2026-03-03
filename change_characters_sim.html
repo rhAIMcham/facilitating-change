@@ -1,39 +1,1315 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta lang="en">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
-<title>Pressure Triggers Quiz</title>
-<style>
-    .checkContainer {
-        display: flex;
-        align-items: center;
-        margin: 15px 0;
-    }
-    
-    :root {
-        --AIMblue: #4353A3;
-        --darkBlue: #38416D;
-        --teal: #5DC8B9;
-        --cream: #F1EEDE;
-        --grey: #e7e9ec;
-        --rust: #AF4510;
-        --navy: #12195C;
-        --white: #ffffff;
-        --lightBlue: #AEBAE4;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post-Restructure Manager Simulation</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+    <style>
 
-    body {
-        font-family: "IBM Plex Sans", sans-serif;
-        margin: 0;
-        padding: 20px;
-    }
-</style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+    --AIMblue: #4353A3;
+    --darkBlue: #38416D;
+    --teal: #5DC8B9;
+    --cream: #F1EEDE;
+    --grey: #e7e9ec;
+    --rust: #AF4510;
+    --navy: #12195C;
+    --white: #ffffff;
+    --lightBlue: #AEBAE4;
+            --surface: #18181f;
+            --surface-2: #22222c;
+            --border: rgba(255,255,255,0.08);
+            --text: #f0ede8;
+            --text-muted: #7a7a8c;
+            --c0: #7eb8d4; --c0-bg: rgba(126,184,212,0.12);
+            --c1: #b07ed4; --c1-bg: rgba(176,126,212,0.12);
+            --c2: #7ed4a0; --c2-bg: rgba(126,212,160,0.12);
+            --c3: #d4957e; --c3-bg: rgba(212,149,126,0.12);
+            --good: #6fcf97;
+            --mid:  #f2c94c;
+            --bad:  #eb5757;
+        }
+
+        body {
+    font-family: "IBM Plex Sans", sans-serif;
+            color:var(--text);
+            min-height:100vh; }
+
+        /* ── INTRO ─────────────────────────── */
+        #intro-screen {
+            position:fixed;
+            inset:0;
+            background:var(--navy);
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            z-index:100;
+            padding:24px;
+        }
+        #intro-screen.hidden {
+            display:none; 
+        }
+        .intro-card {
+            max-width:640px; 
+            width:100%;
+            background:var(--navy);
+            border:1px solid var(--lightBlue); 
+            border-radius:16px; 
+            overflow:hidden;
+        }
+        .intro-card header {
+            padding:40px; 
+            border-bottom:1px solid var(--lightBlue);
+        }
+        .intro-card header h1 { 
+            font-size:2.3rem;
+            color: white; 
+            margin-bottom:8px; 
+        }
+        .intro-card header p  {
+            color: white; 
+            font-size:1rem;
+        }
+        .intro-body  { 
+            padding:32px 40px; 
+        }
+        .intro-body p { 
+            color: white; 
+            line-height:1.75; 
+            margin-bottom:16px;
+            font-size:1rem;
+        }
+        .intro-body p:last-child { 
+            margin-bottom:0; 
+        }
+        .intro-body strong { 
+            color:var(--text); 
+        }
+        .intro-footer { 
+            padding:24px 40px; 
+            border-top:1px solid var(--lightBlue); 
+            text-align:center; }
+
+        /* ── BUTTONS ─────────────────────────── */
+        .btn {
+            padding:11px 24px; 
+            border:none;
+            border-radius:8px;
+            font-weight:500; 
+            font-size:0.8rem;
+            cursor:pointer; 
+            transition:all 0.18s;
+            font-family: "IBM Plex Sans", sans-serif;
+        }
+        .btn-primary { 
+            background:var(--teal); 
+            font-family: "IBM Plex Sans", sans-serif;
+        }
+        .btn-primary:hover:not(:disabled) { 
+            filter:brightness(1.1); 
+            transform:translateY(-1px);
+         }
+        .btn-primary:disabled {
+            opacity:0.4; 
+            cursor:not-allowed; 
+        }
+        .btn-lg { 
+            padding:14px 40px; 
+            font-size:1rem;
+            font-family: "IBM Plex Sans", sans-serif;
+        }
+
+        /* ── MAIN ─────────────────────────── */
+        #main { 
+            display:none; 
+            max-width:1280px; 
+            margin:0 auto; 
+            padding:24px;
+        }
+        #main.visible { 
+            display:block; 
+        }
+        .topbar {
+            display:flex; 
+            justify-content:space-between; 
+            align-items:center; 
+            margin-bottom:28px;
+        }
+        .topbar h1 { 
+            font-size:2rem; 
+            color:var(--teal);
+        }
+        .week-pill {
+            background:var(--AIMblue);
+            border:1px solid var(--lightBlue);
+            border-radius:999px;
+            padding:6px 18px;
+            font-size:0.8rem;
+            color:white;
+        }
+        .week-pill span { 
+            color:white; 
+            font-weight:600; 
+        }
+
+        /* Progress dots */
+        .char-progress {
+            display:flex; 
+            gap:8px; 
+            align-items:center; 
+            font-size:12px; 
+            color:white;
+        }
+        .progress-dot {
+            width:8px;
+            height:8px;
+            border-radius:50%;
+            background:var(--AIMblue);
+            border:1px solid var(--lightBlue);
+            transition: background 0.2s, border-color 0.2s;
+        }
+        .progress-dot.done   { background:var(--good); border-color:var(--good); }
+        .progress-dot.active { background:var(--teal); border-color:var(--teal); }
+
+        /* ── CHARACTER GRID ─────────────────────────── */
+        .character-grid {
+            display:grid; 
+            grid-template-columns:repeat(4,1fr); 
+            gap:16px; 
+            margin-bottom:28px;
+        }
+        .char-card {
+            background:var(--navy);
+            border:1px solid var(--lightBlue);
+            border-radius:12px;
+            padding:20px;
+            position:relative;
+            overflow:hidden;
+            transition:border-color 0.25s, box-shadow 0.25s, opacity 0.25s;
+        }
+        .char-card::before {
+            content:'';
+            position:absolute;
+            top:0;
+            left:0;
+            right:0;
+            height:3px;
+        }
+        .char-card[data-char="0"]::before { background:var(--c0); }
+        .char-card[data-char="1"]::before { background:var(--c1); }
+        .char-card[data-char="2"]::before { background:var(--c2); }
+        .char-card[data-char="3"]::before { background:var(--c3); }
+
+        .char-card.active {
+            border-color:var(--teal);
+            box-shadow:0 0 0 2px var(--teal);
+        }
+        .char-card.done-this-week { opacity:0.45; }
+
+        .char-avatar {
+            width:44px;
+            height:44px;
+            border-radius:50%;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            font-size:20px;
+            margin-bottom:10px;
+        }
+        .char-card[data-char="0"] .char-avatar { background:var(--c0-bg); }
+        .char-card[data-char="1"] .char-avatar { background:var(--c1-bg); }
+        .char-card[data-char="2"] .char-avatar { background:var(--c2-bg); }
+        .char-card[data-char="3"] .char-avatar { background:var(--c3-bg); }
+
+        .char-name {
+            font-weight:600;
+            margin-bottom:2px;
+            font-size: 0.9rem;
+        }
+        .char-role  {
+            font-size: 0.8rem;
+            color:white;
+            margin-bottom:12px; }
+
+        .metrics-list {
+            display:flex;
+            flex-direction:column;
+            gap:7px;
+        }
+        .metric-row   { 
+            display:flex;
+            flex-direction:column;
+            gap:3px;
+        }
+        .metric-label-row {
+            display:flex;
+            justify-content:space-between;
+            font-size:0.8rem;
+            color:white;
+        }
+        .metric-val { font-weight:600; }
+        .metric-bar  { height:4px; background:rgba(255,255,255,0.07); border-radius:3px; overflow:hidden; }
+        .metric-fill { height:100%; border-radius:3px; transition:width 0.45s ease, background 0.45s ease; }
+
+        /* ── SCENARIO PANEL ─────────────────────────── */
+        #scenario-section {
+            background-color: var(--cream);
+            border:1px solid var(--navy);
+            border-radius:12px;
+            margin-bottom:28px;
+            overflow:hidden;
+        }
+        #scenario-section.hidden { display:none; }
+
+        .scenario-header {
+            padding:18px 28px;
+            border-bottom:1px solid var(--lightBlue);
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+        }
+        .scenario-header-left {
+            display:flex;
+            align-items:center;
+            gap:10px;
+        }
+        .scenario-tag {
+            font-size:1rem;
+            font-weight:600;
+            letter-spacing:0.08em;
+            text-transform:uppercase;
+            color: black;
+        }
+        .char-tag {
+            font-size:1rem;
+            font-weight:600;
+            padding:3px 10px;
+            border-radius:999px;
+        }
+        .char-tag[data-char="0"] { background:var(--c0-bg); color:var(--c0); }
+        .char-tag[data-char="1"] { background:var(--c1-bg); color:var(--c1); }
+        .char-tag[data-char="2"] { background:var(--c2-bg); color:var(--c2); }
+        .char-tag[data-char="3"] { background:var(--c3-bg); color:var(--c3); }
+
+        .crisis-badge {
+            font-size:0.8rem;
+            font-weight:600;
+            letter-spacing:0.05em;
+            padding:3px 10px;
+            border-radius:999px;
+            background:rgba(235,87,87,0.15); color:var(--bad);
+            display:none;
+        }
+        .crisis-badge.visible { display:inline-block; }
+
+        .scenario-body { padding:24px 28px; }
+
+        .scenario-situation {
+            background:var(--AIMblue);
+            border-left:3px solid var(--teal);
+            border-radius:0 8px 8px 0;
+            padding:16px 20px;
+            font-size:0.9rem; 
+            line-height:1.75;
+            color:white;
+            margin-bottom:20px;
+        }
+
+        .options-list {
+            display:flex;
+            flex-direction:column;
+            gap:10px;
+        }
+        .option-btn {
+            border:1px solid var(--navy);
+            border-radius:10px;
+            padding:16px 20px;
+            text-align:left;
+            cursor:pointer;
+            transition:all 0.18s;
+            color:black;
+        }
+        .option-btn:hover:not(.disabled):not(.selected) {
+            border-color: var(--teal);
+            background-color: var(--lightBlue);
+        }
+        .option-btn.selected  { border-color:var(--teal); background:var(--lightBlue); }
+        .option-btn.disabled  { pointer-events:none; opacity:0.5; }
+        .option-btn.crisis-opt { border-color:rgba(235,87,87,0.25); }
+        .option-btn.crisis-opt:hover:not(.disabled):not(.selected) {
+            border-color:rgba(235,87,87,0.45); background:rgba(235,87,87,0.05);
+        }
+
+        .opt-label   {
+            font-size:0.8rem;
+            font-weight:600;
+            letter-spacing:0.05em;
+            text-transform:uppercase;
+            color:var(--navy);
+            margin-bottom:5px;
+        }
+        .opt-crisis-label {
+            color:var(--bad);
+        }
+        .opt-text   {
+            font-size:0.9rem;
+            line-height:1.6;
+        }
+        .opt-crisis-note  {
+            font-size:0.8rem;
+            color:var(--bad);
+            margin-top:4px;
+            font-style:italic;
+        }
+
+        .feedback-box {
+            display:none;
+            margin-top:20px;
+            border-radius:10px;
+            padding:16px 20px;
+            font-size:0.9rem;
+            line-height:1.7;
+        }
+        .feedback-box.visible {
+            display:block;
+            color: black;
+        }
+        .feedback-box.good    { background:rgba(111,207,151,0.3); border:1px solid rgba(111,207,151,0.4); }
+        .feedback-box.neutral { background:rgba(242,201,76,0.3);  border:1px solid rgba(242,201,76,0.4); }
+        .feedback-box.bad     { background:rgba(235,87,87,0.3);   border:1px solid rgba(235,87,87,0.4); }
+        .fb-title {
+            font-weight:600;
+            margin-bottom:6px;
+            color: black;
+        }
+
+        .scenario-footer {
+            padding:16px 28px; border-top:1px solid var(--lightBlue);
+            display:flex; justify-content:space-between; align-items:center;
+        }
+        .scenario-footer-note {
+            font-size:0.8rem;
+            color: black;
+        }
+
+        /* ── HISTORY ─────────────────────────── */
+        #history-section {
+            background:var(--navy);
+            border:1px solid var(--lightBlue);
+            border-radius:12px;
+            padding:28px;
+        }
+        #history-section h2 {
+            font-size:1.3rem;
+            color:white;
+            margin-bottom:16px;
+        }
+        .history-week-group {
+            margin-bottom:20px;
+        }
+        .history-week-label {
+            font-size:0.7rem;
+            font-weight:600;
+            letter-spacing:0.08em;
+            text-transform:uppercase;
+            color:white;
+            margin-bottom:8px;
+            padding-bottom:6px;
+            border-bottom:1px solid var(--lightBlue);
+        }
+        .history-entries {
+            display:flex;
+            flex-direction:column;
+            gap:6px;
+        }
+        .history-entry {
+            background:var(--AIMblue);
+            border-radius:8px;
+            padding:12px 16px;
+            font-size:0.8rem;
+            border-left:3px solid var(--lightBlue);
+            display:flex;
+            gap:10px;
+            align-items:baseline;
+            flex-wrap:wrap;
+        }
+        .history-entry.good    { border-left-color:var(--good); }
+        .history-entry.neutral { border-left-color:var(--mid); }
+        .history-entry.bad     { border-left-color:var(--bad); }
+        .he-char  { font-weight:600; color:white; white-space:nowrap; }
+        .he-arrow { color:rgba(255,255,255,0.15); }
+        .he-choice { flex:1; }
+
+        /* ── COMPLETION ─────────────────────────── */
+        #completion-modal {
+            display:none; position:fixed; inset:0;
+            background:rgba(0,0,0,0.75);
+            align-items:center; justify-content:center; z-index:200; padding:24px;
+        }
+        #completion-modal.visible { display:flex; }
+        .completion-card {
+            background:var(--navy);
+            border:1px solid var(--lightBlue);
+            border-radius:16px;
+            max-width:620px;
+            width:100%;
+            max-height:90vh;
+            overflow-y:auto;
+        }
+        .completion-card header {
+            background:linear-gradient(135deg,#1a1a24,#26202e);
+            padding:36px;
+            border-bottom:1px solid var(--lightBlue);
+            text-align:center;
+        }
+        .completion-card header h2 {
+            font-size:2.3rem;
+            color:var(--teal);
+            margin-bottom:6px;
+        }
+        .completion-body {
+            padding:28px;
+        }
+        .final-char {
+            background:var(--AIMblue);
+            border-radius:10px;
+            padding:16px 18px;
+            margin-bottom:12px;
+        }
+        .final-char-name {
+            font-weight:600;
+            font-size:0.8rem;
+            margin-bottom:10px;
+        }
+        .final-metrics-row {
+            display:flex;
+            gap:16px; 
+        }
+        .fmc { flex:1; }
+        .fmc-label { font-size:0.7rem; color:white; margin-bottom:3px; }
+        .fmc-val   { font-weight:700; font-size:1.3rem; }
+        .fmc-val.good { color:var(--good); }
+        .fmc-val.mid  { color:var(--mid); }
+        .fmc-val.bad  { color:var(--bad); }
+        .insight-box {
+            margin-top:16px; border-radius:10px; padding:16px 20px; font-size:0.8rem; line-height:1.7;
+        }
+        .insight-box.good    { background:rgba(111,207,151,0.1); border:1px solid rgba(111,207,151,0.3); }
+        .insight-box.neutral { background:rgba(242,201,76,0.1);  border:1px solid rgba(242,201,76,0.3); }
+        .insight-box.bad     { background:rgba(235,87,87,0.1);   border:1px solid rgba(235,87,87,0.3); }
+        .insight-title { font-weight:600; margin-bottom:6px; }
+        .completion-footer { padding:24px; border-top:1px solid var(--border); text-align:center; }
+
+        /* ── RESPONSIVE ─────────────────────────── */
+        @media (max-width:900px) {
+            .character-grid { grid-template-columns:repeat(2,1fr); }
+        }
+        @media (max-width:560px) {
+            .character-grid { grid-template-columns:1fr; }
+            .intro-body, .intro-footer, .intro-card header { padding:24px; }
+            .final-metrics-row { flex-direction:column; gap:8px; }
+        }
+    </style>
 </head>
 <body>
-    <p>Hello</p>
+
+<!-- ══════════════════ INTRO ══════════════════ -->
+<div id="intro-screen">
+    <div class="intro-card">
+        <header>
+            <h1>After the restructure</h1>
+            <p>A management simulation</p>
+        </header>
+        <div class="intro-body">
+            <!-- ✏️ Edit intro text -->
+            <p>Your company has just gone through a major restructure. Roles have changed, teams have been reshuffled, and morale is uncertain.</p>
+            <p>Over <strong>8 weeks</strong>, you'll manage four employees through the transition. Each week you'll face a situation with <strong>every team member</strong> — your choices shape their engagement.</p>
+            <p>Three metrics track each person: <strong>office attendance</strong>, <strong>message response speed</strong>, and <strong>deadline completion</strong>. Let someone slide into crisis and the options available to you will change.</p>
+        </div>
+        <div class="intro-footer">
+            <button class="btn btn-primary btn-lg" onclick="startSim()">Begin simulation</button>
+        </div>
+    </div>
+</div>
+
+<!-- ══════════════════ MAIN ══════════════════ -->
+<div id="main">
+    <div class="topbar">
+        <h1>Team dashboard</h1>
+        <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px;">
+            <div class="week-pill">Week <span id="week-display">1</span> of 8</div>
+            <div class="char-progress" id="char-progress"></div>
+        </div>
+    </div>
+
+    <div class="character-grid" id="char-grid"></div>
+
+    <div id="scenario-section">
+        <div class="scenario-header">
+            <div class="scenario-header-left">
+                <span class="scenario-tag">Situation</span>
+                <span class="char-tag" id="scenario-char-tag" data-char="0">—</span>
+            </div>
+            <span class="crisis-badge" id="crisis-badge">⚠ Disengagement risk</span>
+        </div>
+        <div class="scenario-body">
+            <div class="scenario-situation" id="scenario-text">—</div>
+            <div class="options-list" id="options-list"></div>
+            <div class="feedback-box" id="feedback-box">
+                <div class="fb-title" id="feedback-title"></div>
+                <div id="feedback-body"></div>
+            </div>
+        </div>
+        <div class="scenario-footer">
+            <span class="scenario-footer-note" id="footer-note"></span>
+            <button class="btn btn-primary" id="next-btn" disabled onclick="advance()">Next →</button>
+        </div>
+    </div>
+
+    <div id="history-section">
+        <h2>Decision log</h2>
+        <div id="history-list">
+            <p>Decisions will appear here as you play.</p>
+        </div>
+    </div>
+</div>
+
+<!-- ══════════════════ COMPLETION ══════════════════ -->
+<div id="completion-modal">
+    <div class="completion-card">
+        <header>
+            <h2>Simulation complete</h2>
+            <p id="completion-sub"></p>
+        </header>
+        <div class="completion-body">
+            <div id="final-chars"></div>
+            <div class="insight-box" id="insight-box">
+                <div class="insight-title" id="insight-title">Manager assessment</div>
+                <div id="insight-text"></div>
+            </div>
+        </div>
+        <div class="completion-footer">
+            <button class="btn btn-primary" onclick="restartSim()">Restart</button>
+        </div>
+    </div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════════════════
+//  CONFIGURATION — edit this section to build your story
+// ═══════════════════════════════════════════════════════════════
+
+// Average metric value below which a character is in "crisis" mode
+// Crisis mode swaps the available options to crisisOptions (if defined)
+const CRISIS_THRESHOLD = 45;
+
+// ── CHARACTERS ────────────────────────────────────────────────
+// id must match array index (0–3).
+// metrics: starting values 0–100 for attendance, responseSpeed, deadlineCompletion
+const CHARACTERS = [
+    {
+        id: 0,
+        name: "Jordan Kim",
+        role: "Senior Analyst",
+        avatar: "👩‍💼",
+        metrics: { attendance: 55, responseSpeed: 60, deadlineCompletion: 70 }
+    },
+    {
+        id: 1,
+        name: "Marcus Webb",
+        role: "Product Coordinator",
+        avatar: "🧑‍💻",
+        metrics: { attendance: 65, responseSpeed: 45, deadlineCompletion: 50 }
+    },
+    {
+        id: 2,
+        name: "Priya Nair",
+        role: "Operations Specialist",
+        avatar: "👩‍🔬",
+        metrics: { attendance: 80, responseSpeed: 75, deadlineCompletion: 65 }
+    },
+    {
+        id: 3,
+        name: "Tom Brennan",
+        role: "Client Liaison",
+        avatar: "🧔",
+        metrics: { attendance: 40, responseSpeed: 35, deadlineCompletion: 55 }
+    }
+];
+
+// ── WEEKS ─────────────────────────────────────────────────────
+// Array of 8 weeks. Each week is an array of 4 entries — one per character, in order 0–3.
+//
+// Each entry:
+//   situation      string    Shown to the player
+//   options        array     Normal options (2–4)
+//   crisisOptions  array     (optional) Shown instead when character avg < CRISIS_THRESHOLD
+//
+// Each option:
+//   label    string   e.g. "Option A"
+//   text     string   Description the player reads
+//   quality  string   "good" | "neutral" | "bad"  — used for history + final score
+//   impact   object   Delta for attendance, responseSpeed, deadlineCompletion (can be negative)
+//   feedback object   { type: "good"|"neutral"|"bad", title: string, body: string }
+
+const WEEKS = [
+
+    // ══ WEEK 1 ══════════════════════════════════════════════════
+    [
+        // Jordan Kim (0)
+        {
+            situation: "✏️ Jordan hasn't been in the office at all this week. You've heard through the grapevine they're upset about losing their team lead role in the restructure. What do you do?",
+            options: [
+                {
+                    label: "Option A", text: "✏️ Schedule a 1:1 to listen without an agenda.",
+                    quality: "good",
+                    impact: { attendance: 10, responseSpeed: 5, deadlineCompletion: 5 },
+                    feedback: { type: "good", title: "✏️ Title", body: "✏️ Jordan appreciated being heard. They returned to the office the following day." }
+                },
+                {
+                    label: "Option B", text: "✏️ Send a message reminding them about the attendance policy.",
+                    quality: "bad",
+                    impact: { attendance: -5, responseSpeed: -10, deadlineCompletion: -5 },
+                    feedback: { type: "bad", title: "✏️ Title", body: "✏️ Jordan felt policed rather than supported." }
+                },
+                {
+                    label: "Option C", text: "✏️ Check in with the rest of the team to gather context first.",
+                    quality: "neutral",
+                    impact: { attendance: 0, responseSpeed: 0, deadlineCompletion: 5 },
+                    feedback: { type: "neutral", title: "✏️ Title", body: "✏️ Useful context gathered, but the delay left Jordan feeling overlooked." }
+                }
+            ]
+        },
+
+        // Marcus Webb (1)
+        {
+            situation: "✏️ Marcus's response times have been terrible all week. A colleague tells you Marcus doesn't actually understand what their new role involves.",
+            options: [
+                {
+                    label: "Option A", text: "✏️ Co-create a clear role scope document together.",
+                    quality: "good",
+                    impact: { attendance: 5, responseSpeed: 15, deadlineCompletion: 10 },
+                    feedback: { type: "good", title: "✏️ Title", body: "✏️ Clarity transformed Marcus's confidence immediately." }
+                },
+                {
+                    label: "Option B", text: "✏️ Escalate to HR to formally define the role.",
+                    quality: "neutral",
+                    impact: { attendance: 0, responseSpeed: 5, deadlineCompletion: 0 },
+                    feedback: { type: "neutral", title: "✏️ Title", body: "✏️ HR produced a document three weeks later. Helpful, but slow." }
+                },
+                {
+                    label: "Option C", text: "✏️ Tell Marcus to use their initiative and figure it out.",
+                    quality: "bad",
+                    impact: { attendance: -5, responseSpeed: -10, deadlineCompletion: -8 },
+                    feedback: { type: "bad", title: "✏️ Title", body: "✏️ Marcus felt abandoned and became more disengaged." }
+                }
+            ],
+            crisisOptions: [
+                {
+                    label: "Crisis A", text: "✏️ [CRISIS] Have a direct conversation today: 'I can see you're struggling — let's fix this together.'",
+                    quality: "good",
+                    impact: { attendance: 8, responseSpeed: 12, deadlineCompletion: 8 },
+                    feedback: { type: "good", title: "✏️ Title", body: "✏️ The direct intervention helped Marcus stabilise quickly." }
+                },
+                {
+                    label: "Crisis B", text: "✏️ [CRISIS] Assign a senior colleague to shadow Marcus this week.",
+                    quality: "neutral",
+                    impact: { attendance: 5, responseSpeed: 8, deadlineCompletion: 5 },
+                    feedback: { type: "neutral", title: "✏️ Title", body: "✏️ The buddy helped, but didn't address the underlying confusion." }
+                }
+            ]
+        },
+
+        // Priya Nair (2)
+        {
+            situation: "✏️ Priya is performing well but seems visibly anxious whenever headcount is discussed. She's started asking colleagues if they've heard any redundancy rumours.",
+            options: [
+                {
+                    label: "Option A", text: "✏️ Reassure her privately that her role is secure.",
+                    quality: "good",
+                    impact: { attendance: 5, responseSpeed: 5, deadlineCompletion: 10 },
+                    feedback: { type: "good", title: "✏️ Title", body: "✏️ Priya refocused quickly once the uncertainty was addressed." }
+                },
+                {
+                    label: "Option B", text: "✏️ Acknowledge the uncertainty honestly without false promises.",
+                    quality: "neutral",
+                    impact: { attendance: 0, responseSpeed: 5, deadlineCompletion: 5 },
+                    feedback: { type: "neutral", title: "✏️ Title", body: "✏️ Priya appreciated the honesty. Anxiety reduced slightly but didn't disappear." }
+                },
+                {
+                    label: "Option C", text: "✏️ Tell her to focus on her work and not worry about things outside her control.",
+                    quality: "bad",
+                    impact: { attendance: -5, responseSpeed: -5, deadlineCompletion: -8 },
+                    feedback: { type: "bad", title: "✏️ Title", body: "✏️ Priya felt dismissed. Her anxiety increased." }
+                }
+            ]
+        },
+
+        // Tom Brennan (3)
+        {
+            situation: "✏️ Tom went from managing 3 people to having no direct reports. His attendance has dropped and a peer describes him as 'checked out'. This is week one — early action matters.",
+            options: [
+                {
+                    label: "Option A", text: "✏️ Meet Tom and ask what kind of work would energise him in this new chapter.",
+                    quality: "good",
+                    impact: { attendance: 12, responseSpeed: 8, deadlineCompletion: 8 },
+                    feedback: { type: "good", title: "✏️ Title", body: "✏️ Tom opened up. He feels underused. You've started building a plan together." }
+                },
+                {
+                    label: "Option B", text: "✏️ Issue a friendly reminder about attendance expectations.",
+                    quality: "bad",
+                    impact: { attendance: 5, responseSpeed: -5, deadlineCompletion: -5 },
+                    feedback: { type: "bad", title: "✏️ Title", body: "✏️ Tom turns up more but becomes visibly resentful." }
+                }
+            ],
+            crisisOptions: [
+                {
+                    label: "Crisis A", text: "✏️ [CRISIS] Sit down with Tom today: 'I'm worried about you. What do you need from me right now?'",
+                    quality: "good",
+                    impact: { attendance: 15, responseSpeed: 10, deadlineCompletion: 5 },
+                    feedback: { type: "good", title: "✏️ Title", body: "✏️ Tom was surprised by the directness. It broke through his disengagement." }
+                },
+                {
+                    label: "Crisis B", text: "✏️ [CRISIS] Escalate to HR and flag Tom as a retention risk.",
+                    quality: "neutral",
+                    impact: { attendance: 0, responseSpeed: 0, deadlineCompletion: 5 },
+                    feedback: { type: "neutral", title: "✏️ Title", body: "✏️ HR involvement creates a paper trail but feels bureaucratic. Tom notices." }
+                }
+            ]
+        }
+    ],
+
+    // ══ WEEK 2 ══════════════════════════════════════════════════
+    [
+        // Jordan Kim (0)
+        {
+            situation: "✏️ Jordan is back in the office but seems to be doing the minimum. They've been skipping optional team stand-ups. A peer says Jordan feels 'sidelined'.",
+            options: [
+                {
+                    label: "Option A", text: "✏️ Give Jordan ownership of a small visible project to rebuild purpose.",
+                    quality: "good",
+                    impact: { attendance: 8, responseSpeed: 8, deadlineCompletion: 10 },
+                    feedback: { type: "good", title: "✏️ Title", body: "✏️ Having something meaningful to own shifted Jordan's attitude noticeably." }
+                },
+                {
+                    label: "Option B", text: "✏️ Make attendance at stand-ups mandatory for the whole team.",
+                    quality: "bad",
+                    impact: { attendance: 5, responseSpeed: -5, deadlineCompletion: -5 },
+                    feedback: { type: "bad", title: "✏️ Title", body: "✏️ Jordan complies but feels micromanaged. Team morale dips." }
+                },
+                {
+                    label: "Option C", text: "✏️ Ask Jordan to mentor one of the junior team members.",
+                    quality: "neutral",
+                    impact: { attendance: 5, responseSpeed: 5, deadlineCompletion: 5 },
+                    feedback: { type: "neutral", title: "✏️ Title", body: "✏️ Jordan appreciates the gesture but it doesn't fully replace the leadership they lost." }
+                }
+            ],
+            crisisOptions: [
+                {
+                    label: "Crisis A", text: "✏️ [CRISIS] Have a direct conversation about whether Jordan wants to stay on the team.",
+                    quality: "good",
+                    impact: { attendance: 10, responseSpeed: 8, deadlineCompletion: 8 },
+                    feedback: { type: "good", title: "✏️ Title", body: "✏️ The directness shook Jordan out of passivity. They recommitted." }
+                },
+                {
+                    label: "Crisis B", text: "✏️ [CRISIS] Reduce Jordan's workload and check in daily for a week.",
+                    quality: "neutral",
+                    impact: { attendance: 5, responseSpeed: 5, deadlineCompletion: 0 },
+                    feedback: { type: "neutral", title: "✏️ Title", body: "✏️ The support helped, but Jordan needs purpose, not less work." }
+                }
+            ]
+        },
+
+        // Marcus Webb (1)
+        {
+            situation: "✏️ Marcus missed a deadline this week — the first time. They apologised but gave no explanation. You sense overwhelm rather than carelessness.",
+            options: [
+                {
+                    label: "Option A", text: "✏️ Explore what's causing the overwhelm before addressing the missed deadline.",
+                    quality: "good",
+                    impact: { attendance: 5, responseSpeed: 8, deadlineCompletion: 12 },
+                    feedback: { type: "good", title: "✏️ Title", body: "✏️ Marcus is juggling requests from three stakeholders with no prioritisation system. You fix that." }
+                },
+                {
+                    label: "Option B", text: "✏️ Send a formal note flagging that missed deadlines are unacceptable.",
+                    quality: "bad",
+                    impact: { attendance: -5, responseSpeed: -8, deadlineCompletion: -10 },
+                    feedback: { type: "bad", title: "✏️ Title", body: "✏️ Marcus shuts down. The formality felt targeted, not supportive." }
+                },
+                {
+                    label: "Option C", text: "✏️ Suggest Marcus use a task management tool to get more organised.",
+                    quality: "neutral",
+                    impact: { attendance: 0, responseSpeed: 5, deadlineCompletion: 5 },
+                    feedback: { type: "neutral", title: "✏️ Title", body: "✏️ Mildly helpful. Doesn't address the stakeholder overload problem." }
+                }
+            ],
+            crisisOptions: [
+                {
+                    label: "Crisis A", text: "✏️ [CRISIS] Temporarily reduce Marcus's task load and build a recovery plan together.",
+                    quality: "good",
+                    impact: { attendance: 5, responseSpeed: 10, deadlineCompletion: 12 },
+                    feedback: { type: "good", title: "✏️ Title", body: "✏️ The reduced load gives Marcus space to stabilise and rebuild confidence." }
+                },
+                {
+                    label: "Crisis B", text: "✏️ [CRISIS] Loop in your own manager for advice on how to handle this.",
+                    quality: "neutral",
+                    impact: { attendance: 0, responseSpeed: 0, deadlineCompletion: 5 },
+                    feedback: { type: "neutral", title: "✏️ Title", body: "✏️ Useful for you, but Marcus notices being escalated over and feels less trusted." }
+                }
+            ]
+        },
+
+        // Priya Nair (2)
+        {
+            situation: "✏️ Priya has been arriving early and leaving late. Her output is excellent but she looks exhausted. You're concerned she's running on anxiety rather than motivation.",
+            options: [
+                {
+                    label: "Option A", text: "✏️ Name what you're observing: 'I'm noticing you seem stretched. How are you actually doing?'",
+                    quality: "good",
+                    impact: { attendance: 5, responseSpeed: 5, deadlineCompletion: 5 },
+                    feedback: { type: "good", title: "✏️ Title", body: "✏️ Priya needed someone to notice. She leaves on time the rest of the week." }
+                },
+                {
+                    label: "Option B", text: "✏️ Praise her work rate and use her as an example to the team.",
+                    quality: "bad",
+                    impact: { attendance: 0, responseSpeed: -5, deadlineCompletion: -8 },
+                    feedback: { type: "bad", title: "✏️ Title", body: "✏️ Priya feels pressure to maintain an unsustainable pace. Burnout risk increases." }
+                },
+                {
+                    label: "Option C", text: "✏️ Set a team norm: no emails after 6pm.",
+                    quality: "neutral",
+                    impact: { attendance: 0, responseSpeed: 5, deadlineCompletion: 0 },
+                    feedback: { type: "neutral", title: "✏️ Title", body: "✏️ The boundary helps, but the anxiety underneath remains." }
+                }
+            ]
+        },
+
+        // Tom Brennan (3)
+        {
+            situation: "✏️ Tom was late to two client calls this week. Clients noticed. His excuse was vague. You sense he's stopped caring about the role.",
+            options: [
+                {
+                    label: "Option A", text: "✏️ Give Tom a stretch goal — lead a project that uses his leadership experience.",
+                    quality: "good",
+                    impact: { attendance: 15, responseSpeed: 10, deadlineCompletion: 10 },
+                    feedback: { type: "good", title: "✏️ Title", body: "✏️ Having something to lead reignited Tom's engagement." }
+                },
+                {
+                    label: "Option B", text: "✏️ Put him on a performance improvement plan.",
+                    quality: "bad",
+                    impact: { attendance: 5, responseSpeed: -5, deadlineCompletion: -5 },
+                    feedback: { type: "bad", title: "✏️ Title", body: "✏️ Tom complies but becomes hostile. Trust evaporates." }
+                },
+                {
+                    label: "Option C", text: "✏️ Ask if there's a different client account better suited to where he is right now.",
+                    quality: "neutral",
+                    impact: { attendance: 5, responseSpeed: 5, deadlineCompletion: 5 },
+                    feedback: { type: "neutral", title: "✏️ Title", body: "✏️ A fresh account helps slightly. Doesn't solve the underlying loss of purpose." }
+                }
+            ],
+            crisisOptions: [
+                {
+                    label: "Crisis A", text: "✏️ [CRISIS] Tell Tom plainly: 'I'm going to have to escalate this if things don't change. I don't want to. What do you need?'",
+                    quality: "good",
+                    impact: { attendance: 10, responseSpeed: 8, deadlineCompletion: 8 },
+                    feedback: { type: "good", title: "✏️ Title", body: "✏️ Tom hears the gravity of the situation. He asks for a role review. You start one." }
+                },
+                {
+                    label: "Crisis B", text: "✏️ [CRISIS] Escalate to HR immediately without warning Tom first.",
+                    quality: "bad",
+                    impact: { attendance: -5, responseSpeed: -8, deadlineCompletion: -5 },
+                    feedback: { type: "bad", title: "✏️ Title", body: "✏️ Tom feels blindsided. Any remaining trust is gone." }
+                }
+            ]
+        }
+    ],
+
+    // ══ WEEKS 3–8 — placeholder structure ═══════════════════════
+    // Each week: array of 4 entries in character order [0,1,2,3].
+    // Copy from weeks 1–2 as a guide; fill in situation, options, feedback.
+
+    // ── WEEK 3 ──
+    [
+        { // Jordan (0)
+            situation: "✏️ [WEEK 3 — Jordan Kim] Write situation here.",
+            options: [
+                { label:"Option A", text:"✏️ Write option.", quality:"good",    impact:{attendance:8,  responseSpeed:8,  deadlineCompletion:8},  feedback:{type:"good",    title:"✏️",body:"✏️"} },
+                { label:"Option B", text:"✏️ Write option.", quality:"neutral", impact:{attendance:3,  responseSpeed:3,  deadlineCompletion:3},  feedback:{type:"neutral", title:"✏️",body:"✏️"} },
+                { label:"Option C", text:"✏️ Write option.", quality:"bad",     impact:{attendance:-5, responseSpeed:-5, deadlineCompletion:-5}, feedback:{type:"bad",     title:"✏️",body:"✏️"} }
+            ],
+            crisisOptions: [
+                { label:"Crisis A", text:"✏️ [CRISIS] Write crisis option.", quality:"good",    impact:{attendance:10, responseSpeed:5, deadlineCompletion:5}, feedback:{type:"good",    title:"✏️",body:"✏️"} },
+                { label:"Crisis B", text:"✏️ [CRISIS] Write crisis option.", quality:"neutral", impact:{attendance:5,  responseSpeed:3, deadlineCompletion:3}, feedback:{type:"neutral", title:"✏️",body:"✏️"} }
+            ]
+        },
+        { // Marcus (1)
+            situation: "✏️ [WEEK 3 — Marcus Webb] Write situation here.",
+            options: [
+                { label:"Option A", text:"✏️ Write option.", quality:"good",    impact:{attendance:8,  responseSpeed:8,  deadlineCompletion:8},  feedback:{type:"good",    title:"✏️",body:"✏️"} },
+                { label:"Option B", text:"✏️ Write option.", quality:"neutral", impact:{attendance:3,  responseSpeed:3,  deadlineCompletion:3},  feedback:{type:"neutral", title:"✏️",body:"✏️"} },
+                { label:"Option C", text:"✏️ Write option.", quality:"bad",     impact:{attendance:-5, responseSpeed:-5, deadlineCompletion:-5}, feedback:{type:"bad",     title:"✏️",body:"✏️"} }
+            ]
+        },
+        { // Priya (2)
+            situation: "✏️ [WEEK 3 — Priya Nair] Write situation here.",
+            options: [
+                { label:"Option A", text:"✏️ Write option.", quality:"good",    impact:{attendance:8,  responseSpeed:8,  deadlineCompletion:8},  feedback:{type:"good",    title:"✏️",body:"✏️"} },
+                { label:"Option B", text:"✏️ Write option.", quality:"neutral", impact:{attendance:3,  responseSpeed:3,  deadlineCompletion:3},  feedback:{type:"neutral", title:"✏️",body:"✏️"} },
+                { label:"Option C", text:"✏️ Write option.", quality:"bad",     impact:{attendance:-5, responseSpeed:-5, deadlineCompletion:-5}, feedback:{type:"bad",     title:"✏️",body:"✏️"} }
+            ]
+        },
+        { // Tom (3)
+            situation: "✏️ [WEEK 3 — Tom Brennan] Write situation here.",
+            options: [
+                { label:"Option A", text:"✏️ Write option.", quality:"good",    impact:{attendance:8,  responseSpeed:8,  deadlineCompletion:8},  feedback:{type:"good",    title:"✏️",body:"✏️"} },
+                { label:"Option B", text:"✏️ Write option.", quality:"neutral", impact:{attendance:3,  responseSpeed:3,  deadlineCompletion:3},  feedback:{type:"neutral", title:"✏️",body:"✏️"} },
+                { label:"Option C", text:"✏️ Write option.", quality:"bad",     impact:{attendance:-5, responseSpeed:-5, deadlineCompletion:-5}, feedback:{type:"bad",     title:"✏️",body:"✏️"} }
+            ],
+            crisisOptions: [
+                { label:"Crisis A", text:"✏️ [CRISIS] Write crisis option.", quality:"good",    impact:{attendance:10, responseSpeed:5, deadlineCompletion:5}, feedback:{type:"good",    title:"✏️",body:"✏️"} },
+                { label:"Crisis B", text:"✏️ [CRISIS] Write crisis option.", quality:"neutral", impact:{attendance:5,  responseSpeed:3, deadlineCompletion:3}, feedback:{type:"neutral", title:"✏️",body:"✏️"} }
+            ]
+        }
+    ],
+
+    // ── WEEK 4 ──
+    [
+        { situation:"✏️ [WEEK 4 — Jordan] Write situation.", options:[ {label:"Option A",text:"✏️",quality:"good",   impact:{attendance:8,responseSpeed:8,deadlineCompletion:8},  feedback:{type:"good",   title:"✏️",body:"✏️"}}, {label:"Option B",text:"✏️",quality:"neutral",impact:{attendance:3,responseSpeed:3,deadlineCompletion:3},  feedback:{type:"neutral",title:"✏️",body:"✏️"}}, {label:"Option C",text:"✏️",quality:"bad",   impact:{attendance:-5,responseSpeed:-5,deadlineCompletion:-5},feedback:{type:"bad",   title:"✏️",body:"✏️"}} ] },
+        { situation:"✏️ [WEEK 4 — Marcus] Write situation.", options:[ {label:"Option A",text:"✏️",quality:"good",   impact:{attendance:8,responseSpeed:8,deadlineCompletion:8},  feedback:{type:"good",   title:"✏️",body:"✏️"}}, {label:"Option B",text:"✏️",quality:"neutral",impact:{attendance:3,responseSpeed:3,deadlineCompletion:3},  feedback:{type:"neutral",title:"✏️",body:"✏️"}}, {label:"Option C",text:"✏️",quality:"bad",   impact:{attendance:-5,responseSpeed:-5,deadlineCompletion:-5},feedback:{type:"bad",   title:"✏️",body:"✏️"}} ] },
+        { situation:"✏️ [WEEK 4 — Priya] Write situation.",  options:[ {label:"Option A",text:"✏️",quality:"good",   impact:{attendance:8,responseSpeed:8,deadlineCompletion:8},  feedback:{type:"good",   title:"✏️",body:"✏️"}}, {label:"Option B",text:"✏️",quality:"neutral",impact:{attendance:3,responseSpeed:3,deadlineCompletion:3},  feedback:{type:"neutral",title:"✏️",body:"✏️"}}, {label:"Option C",text:"✏️",quality:"bad",   impact:{attendance:-5,responseSpeed:-5,deadlineCompletion:-5},feedback:{type:"bad",   title:"✏️",body:"✏️"}} ] },
+        { situation:"✏️ [WEEK 4 — Tom] Write situation.",    options:[ {label:"Option A",text:"✏️",quality:"good",   impact:{attendance:8,responseSpeed:8,deadlineCompletion:8},  feedback:{type:"good",   title:"✏️",body:"✏️"}}, {label:"Option B",text:"✏️",quality:"neutral",impact:{attendance:3,responseSpeed:3,deadlineCompletion:3},  feedback:{type:"neutral",title:"✏️",body:"✏️"}}, {label:"Option C",text:"✏️",quality:"bad",   impact:{attendance:-5,responseSpeed:-5,deadlineCompletion:-5},feedback:{type:"bad",   title:"✏️",body:"✏️"}} ] }
+    ],
+
+    // ── WEEK 5 ──
+    [
+        { situation:"✏️ [WEEK 5 — Jordan] Write situation.", options:[ {label:"Option A",text:"✏️",quality:"good",   impact:{attendance:8,responseSpeed:8,deadlineCompletion:8},  feedback:{type:"good",   title:"✏️",body:"✏️"}}, {label:"Option B",text:"✏️",quality:"neutral",impact:{attendance:3,responseSpeed:3,deadlineCompletion:3},  feedback:{type:"neutral",title:"✏️",body:"✏️"}}, {label:"Option C",text:"✏️",quality:"bad",   impact:{attendance:-5,responseSpeed:-5,deadlineCompletion:-5},feedback:{type:"bad",   title:"✏️",body:"✏️"}} ] },
+        { situation:"✏️ [WEEK 5 — Marcus] Write situation.", options:[ {label:"Option A",text:"✏️",quality:"good",   impact:{attendance:8,responseSpeed:8,deadlineCompletion:8},  feedback:{type:"good",   title:"✏️",body:"✏️"}}, {label:"Option B",text:"✏️",quality:"neutral",impact:{attendance:3,responseSpeed:3,deadlineCompletion:3},  feedback:{type:"neutral",title:"✏️",body:"✏️"}}, {label:"Option C",text:"✏️",quality:"bad",   impact:{attendance:-5,responseSpeed:-5,deadlineCompletion:-5},feedback:{type:"bad",   title:"✏️",body:"✏️"}} ] },
+        { situation:"✏️ [WEEK 5 — Priya] Write situation.",  options:[ {label:"Option A",text:"✏️",quality:"good",   impact:{attendance:8,responseSpeed:8,deadlineCompletion:8},  feedback:{type:"good",   title:"✏️",body:"✏️"}}, {label:"Option B",text:"✏️",quality:"neutral",impact:{attendance:3,responseSpeed:3,deadlineCompletion:3},  feedback:{type:"neutral",title:"✏️",body:"✏️"}}, {label:"Option C",text:"✏️",quality:"bad",   impact:{attendance:-5,responseSpeed:-5,deadlineCompletion:-5},feedback:{type:"bad",   title:"✏️",body:"✏️"}} ] },
+        { situation:"✏️ [WEEK 5 — Tom] Write situation.",    options:[ {label:"Option A",text:"✏️",quality:"good",   impact:{attendance:8,responseSpeed:8,deadlineCompletion:8},  feedback:{type:"good",   title:"✏️",body:"✏️"}}, {label:"Option B",text:"✏️",quality:"neutral",impact:{attendance:3,responseSpeed:3,deadlineCompletion:3},  feedback:{type:"neutral",title:"✏️",body:"✏️"}}, {label:"Option C",text:"✏️",quality:"bad",   impact:{attendance:-5,responseSpeed:-5,deadlineCompletion:-5},feedback:{type:"bad",   title:"✏️",body:"✏️"}} ] }
+    ],
+
+    // ── WEEK 6 ──
+    [
+        { situation:"✏️ [WEEK 6 — Jordan] Write situation.", options:[ {label:"Option A",text:"✏️",quality:"good",   impact:{attendance:8,responseSpeed:8,deadlineCompletion:8},  feedback:{type:"good",   title:"✏️",body:"✏️"}}, {label:"Option B",text:"✏️",quality:"neutral",impact:{attendance:3,responseSpeed:3,deadlineCompletion:3},  feedback:{type:"neutral",title:"✏️",body:"✏️"}}, {label:"Option C",text:"✏️",quality:"bad",   impact:{attendance:-5,responseSpeed:-5,deadlineCompletion:-5},feedback:{type:"bad",   title:"✏️",body:"✏️"}} ] },
+        { situation:"✏️ [WEEK 6 — Marcus] Write situation.", options:[ {label:"Option A",text:"✏️",quality:"good",   impact:{attendance:8,responseSpeed:8,deadlineCompletion:8},  feedback:{type:"good",   title:"✏️",body:"✏️"}}, {label:"Option B",text:"✏️",quality:"neutral",impact:{attendance:3,responseSpeed:3,deadlineCompletion:3},  feedback:{type:"neutral",title:"✏️",body:"✏️"}}, {label:"Option C",text:"✏️",quality:"bad",   impact:{attendance:-5,responseSpeed:-5,deadlineCompletion:-5},feedback:{type:"bad",   title:"✏️",body:"✏️"}} ] },
+        { situation:"✏️ [WEEK 6 — Priya] Write situation.",  options:[ {label:"Option A",text:"✏️",quality:"good",   impact:{attendance:8,responseSpeed:8,deadlineCompletion:8},  feedback:{type:"good",   title:"✏️",body:"✏️"}}, {label:"Option B",text:"✏️",quality:"neutral",impact:{attendance:3,responseSpeed:3,deadlineCompletion:3},  feedback:{type:"neutral",title:"✏️",body:"✏️"}}, {label:"Option C",text:"✏️",quality:"bad",   impact:{attendance:-5,responseSpeed:-5,deadlineCompletion:-5},feedback:{type:"bad",   title:"✏️",body:"✏️"}} ] },
+        { situation:"✏️ [WEEK 6 — Tom] Write situation.",    options:[ {label:"Option A",text:"✏️",quality:"good",   impact:{attendance:8,responseSpeed:8,deadlineCompletion:8},  feedback:{type:"good",   title:"✏️",body:"✏️"}}, {label:"Option B",text:"✏️",quality:"neutral",impact:{attendance:3,responseSpeed:3,deadlineCompletion:3},  feedback:{type:"neutral",title:"✏️",body:"✏️"}}, {label:"Option C",text:"✏️",quality:"bad",   impact:{attendance:-5,responseSpeed:-5,deadlineCompletion:-5},feedback:{type:"bad",   title:"✏️",body:"✏️"}} ] }
+    ],
+
+    // ── WEEK 7 ──
+    [
+        { situation:"✏️ [WEEK 7 — Jordan] Write situation.", options:[ {label:"Option A",text:"✏️",quality:"good",   impact:{attendance:8,responseSpeed:8,deadlineCompletion:8},  feedback:{type:"good",   title:"✏️",body:"✏️"}}, {label:"Option B",text:"✏️",quality:"neutral",impact:{attendance:3,responseSpeed:3,deadlineCompletion:3},  feedback:{type:"neutral",title:"✏️",body:"✏️"}}, {label:"Option C",text:"✏️",quality:"bad",   impact:{attendance:-5,responseSpeed:-5,deadlineCompletion:-5},feedback:{type:"bad",   title:"✏️",body:"✏️"}} ] },
+        { situation:"✏️ [WEEK 7 — Marcus] Write situation.", options:[ {label:"Option A",text:"✏️",quality:"good",   impact:{attendance:8,responseSpeed:8,deadlineCompletion:8},  feedback:{type:"good",   title:"✏️",body:"✏️"}}, {label:"Option B",text:"✏️",quality:"neutral",impact:{attendance:3,responseSpeed:3,deadlineCompletion:3},  feedback:{type:"neutral",title:"✏️",body:"✏️"}}, {label:"Option C",text:"✏️",quality:"bad",   impact:{attendance:-5,responseSpeed:-5,deadlineCompletion:-5},feedback:{type:"bad",   title:"✏️",body:"✏️"}} ] },
+        { situation:"✏️ [WEEK 7 — Priya] Write situation.",  options:[ {label:"Option A",text:"✏️",quality:"good",   impact:{attendance:8,responseSpeed:8,deadlineCompletion:8},  feedback:{type:"good",   title:"✏️",body:"✏️"}}, {label:"Option B",text:"✏️",quality:"neutral",impact:{attendance:3,responseSpeed:3,deadlineCompletion:3},  feedback:{type:"neutral",title:"✏️",body:"✏️"}}, {label:"Option C",text:"✏️",quality:"bad",   impact:{attendance:-5,responseSpeed:-5,deadlineCompletion:-5},feedback:{type:"bad",   title:"✏️",body:"✏️"}} ] },
+        { situation:"✏️ [WEEK 7 — Tom] Write situation.",    options:[ {label:"Option A",text:"✏️",quality:"good",   impact:{attendance:8,responseSpeed:8,deadlineCompletion:8},  feedback:{type:"good",   title:"✏️",body:"✏️"}}, {label:"Option B",text:"✏️",quality:"neutral",impact:{attendance:3,responseSpeed:3,deadlineCompletion:3},  feedback:{type:"neutral",title:"✏️",body:"✏️"}}, {label:"Option C",text:"✏️",quality:"bad",   impact:{attendance:-5,responseSpeed:-5,deadlineCompletion:-5},feedback:{type:"bad",   title:"✏️",body:"✏️"}} ] }
+    ],
+
+    // ── WEEK 8 (final) ──
+    [
+        { situation:"✏️ [WEEK 8 — Jordan] Final week situation.", options:[ {label:"Option A",text:"✏️",quality:"good",   impact:{attendance:10,responseSpeed:10,deadlineCompletion:10}, feedback:{type:"good",   title:"✏️",body:"✏️"}}, {label:"Option B",text:"✏️",quality:"neutral",impact:{attendance:3,responseSpeed:3,deadlineCompletion:3},   feedback:{type:"neutral",title:"✏️",body:"✏️"}}, {label:"Option C",text:"✏️",quality:"bad",   impact:{attendance:-8,responseSpeed:-8,deadlineCompletion:-8}, feedback:{type:"bad",   title:"✏️",body:"✏️"}} ] },
+        { situation:"✏️ [WEEK 8 — Marcus] Final week situation.", options:[ {label:"Option A",text:"✏️",quality:"good",   impact:{attendance:10,responseSpeed:10,deadlineCompletion:10}, feedback:{type:"good",   title:"✏️",body:"✏️"}}, {label:"Option B",text:"✏️",quality:"neutral",impact:{attendance:3,responseSpeed:3,deadlineCompletion:3},   feedback:{type:"neutral",title:"✏️",body:"✏️"}}, {label:"Option C",text:"✏️",quality:"bad",   impact:{attendance:-8,responseSpeed:-8,deadlineCompletion:-8}, feedback:{type:"bad",   title:"✏️",body:"✏️"}} ] },
+        { situation:"✏️ [WEEK 8 — Priya] Final week situation.",  options:[ {label:"Option A",text:"✏️",quality:"good",   impact:{attendance:10,responseSpeed:10,deadlineCompletion:10}, feedback:{type:"good",   title:"✏️",body:"✏️"}}, {label:"Option B",text:"✏️",quality:"neutral",impact:{attendance:3,responseSpeed:3,deadlineCompletion:3},   feedback:{type:"neutral",title:"✏️",body:"✏️"}}, {label:"Option C",text:"✏️",quality:"bad",   impact:{attendance:-8,responseSpeed:-8,deadlineCompletion:-8}, feedback:{type:"bad",   title:"✏️",body:"✏️"}} ] },
+        { situation:"✏️ [WEEK 8 — Tom] Final week situation.",    options:[ {label:"Option A",text:"✏️",quality:"good",   impact:{attendance:10,responseSpeed:10,deadlineCompletion:10}, feedback:{type:"good",   title:"✏️",body:"✏️"}}, {label:"Option B",text:"✏️",quality:"neutral",impact:{attendance:3,responseSpeed:3,deadlineCompletion:3},   feedback:{type:"neutral",title:"✏️",body:"✏️"}}, {label:"Option C",text:"✏️",quality:"bad",   impact:{attendance:-8,responseSpeed:-8,deadlineCompletion:-8}, feedback:{type:"bad",   title:"✏️",body:"✏️"}} ] }
+    ]
+
+]; // end WEEKS
+
+
+// ═══════════════════════════════════════════════════════════════
+//  ENGINE — no edits needed below this line
+// ═══════════════════════════════════════════════════════════════
+
+const METRIC_LABELS = {
+    attendance:         "Office attendance",
+    responseSpeed:      "Message response",
+    deadlineCompletion: "Deadline completion"
+};
+
+const TOTAL_WEEKS = 8;
+
+let state = {
+    week:     1,
+    charIdx:  0,   // 0–3, which character within the current week
+    chars:    [],
+    log:      []   // flat decision log
+};
+
+// ── helpers ──────────────────────────────────────────────────
+
+function charAvg(char) {
+    const vals = Object.values(char.metrics);
+    return vals.reduce((a, b) => a + b, 0) / vals.length;
+}
+
+function getOptions(weekEntry, char) {
+    const inCrisis = charAvg(char) < CRISIS_THRESHOLD;
+    if (inCrisis && weekEntry.crisisOptions && weekEntry.crisisOptions.length > 0) {
+        return { options: weekEntry.crisisOptions, crisis: true };
+    }
+    return { options: weekEntry.options, crisis: false };
+}
+
+// ── start ────────────────────────────────────────────────────
+
+function startSim() {
+    state.chars  = CHARACTERS.map(c => ({ ...c, metrics: { ...c.metrics } }));
+    state.week   = 1;
+    state.charIdx = 0;
+    state.log    = [];
+
+    document.getElementById('intro-screen').classList.add('hidden');
+    document.getElementById('main').classList.add('visible');
+
+    renderCharGrid();
+    renderProgress();
+    loadSituation();
+}
+
+// ── render character cards ────────────────────────────────────
+
+function renderCharGrid() {
+    const grid = document.getElementById('char-grid');
+    grid.innerHTML = '';
+    state.chars.forEach((char, i) => {
+        const isActive = i === state.charIdx;
+        const isDone   = i < state.charIdx;
+        const card = document.createElement('div');
+        card.className = `char-card${isActive ? ' active' : ''}${isDone ? ' done-this-week' : ''}`;
+        card.dataset.char = char.id;
+
+        const bars = Object.entries(char.metrics).map(([key, val]) => {
+            const v = Math.max(0, Math.min(100, val));
+            const col = v >= 70 ? 'var(--good)' : v >= 45 ? 'var(--mid)' : 'var(--bad)';
+            return `<div class="metric-row">
+                <div class="metric-label-row">
+                    <span>${METRIC_LABELS[key]}</span>
+                    <span class="metric-val">${v}%</span>
+                </div>
+                <div class="metric-bar">
+                    <div class="metric-fill" style="width:${v}%;background:${col};"></div>
+                </div>
+            </div>`;
+        }).join('');
+
+        card.innerHTML = `
+            <div class="char-avatar">${char.avatar}</div>
+            <div class="char-name">${char.name}</div>
+            <div class="char-role">${char.role}</div>
+            <div class="metrics-list">${bars}</div>
+        `;
+        grid.appendChild(card);
+    });
+}
+
+// ── render progress dots ──────────────────────────────────────
+
+function renderProgress() {
+    const el = document.getElementById('char-progress');
+    const dots = state.chars.map((c, i) => {
+        const cls = i < state.charIdx ? 'done' : i === state.charIdx ? 'active' : '';
+        return `<div class="progress-dot ${cls}" title="${c.name}"></div>`;
+    }).join('');
+    el.innerHTML = `<span>${state.chars[state.charIdx].name}</span>${dots}`;
+}
+
+// ── load current situation ────────────────────────────────────
+
+function loadSituation() {
+    document.getElementById('week-display').textContent = state.week;
+
+    const weekEntry = WEEKS[state.week - 1][state.charIdx];
+    const char      = state.chars[state.charIdx];
+    const { options, crisis } = getOptions(weekEntry, char);
+
+    // header
+    const tag = document.getElementById('scenario-char-tag');
+    tag.textContent  = char.name;
+    tag.dataset.char = char.id;
+    document.getElementById('crisis-badge').classList.toggle('visible', crisis);
+    document.getElementById('scenario-text').textContent = weekEntry.situation;
+
+    // options
+    const list = document.getElementById('options-list');
+    list.innerHTML = '';
+    options.forEach((opt, idx) => {
+        const btn = document.createElement('button');
+        btn.className = 'option-btn' + (crisis ? ' crisis-opt' : '');
+        btn.innerHTML = `
+            <div class="opt-label${crisis ? ' opt-crisis-label' : ''}">${opt.label}</div>
+            <div class="opt-text">${opt.text}</div>
+            ${crisis ? '<div class="opt-crisis-note">Crisis response</div>' : ''}
+        `;
+        btn.onclick = () => pick(idx, options, char);
+        list.appendChild(btn);
+    });
+
+    // reset feedback + advance button
+    document.getElementById('feedback-box').className = 'feedback-box';
+    document.getElementById('feedback-title').textContent = '';
+    document.getElementById('feedback-body').textContent  = '';
+    document.getElementById('next-btn').disabled = true;
+    document.getElementById('scenario-section').classList.remove('hidden');
+
+    updateFooterNote();
+}
+
+function updateFooterNote() {
+    const remaining = (CHARACTERS.length - 1) - state.charIdx;
+    let note;
+    if (remaining > 0) {
+        note = `${remaining} more team member${remaining > 1 ? 's' : ''} to respond to this week`;
+    } else if (state.week < TOTAL_WEEKS) {
+        note = `End of week ${state.week} — next week begins after this`;
+    } else {
+        note = 'Final decision of the simulation';
+    }
+    document.getElementById('footer-note').textContent = note;
+}
+
+// ── pick an option ────────────────────────────────────────────
+
+function pick(idx, options, char) {
+    const opt = options[idx];
+
+    document.querySelectorAll('.option-btn').forEach((btn, i) => {
+        btn.classList.add('disabled');
+        if (i === idx) btn.classList.add('selected');
+    });
+
+    // apply metric delta
+    Object.entries(opt.impact).forEach(([key, delta]) => {
+        char.metrics[key] = Math.max(0, Math.min(100, char.metrics[key] + delta));
+    });
+
+    // feedback
+    const fb = document.getElementById('feedback-box');
+    fb.className = `feedback-box visible ${opt.feedback.type}`;
+    document.getElementById('feedback-title').textContent = opt.feedback.title;
+    document.getElementById('feedback-body').textContent  = opt.feedback.body;
+
+    // log
+    state.log.push({
+        week:     state.week,
+        charName: char.name,
+        charId:   char.id,
+        label:    opt.label,
+        text:     opt.text,
+        quality:  opt.quality
+    });
+
+    renderCharGrid();
+    renderHistory();
+    document.getElementById('next-btn').disabled = false;
+    updateFooterNote();
+}
+
+// ── advance ───────────────────────────────────────────────────
+
+function advance() {
+    state.charIdx++;
+
+    if (state.charIdx < CHARACTERS.length) {
+        renderProgress();
+        loadSituation();
+        renderCharGrid();
+    } else {
+        state.week++;
+        state.charIdx = 0;
+        if (state.week > TOTAL_WEEKS) {
+            showCompletion();
+        } else {
+            renderCharGrid();
+            renderProgress();
+            loadSituation();
+        }
+    }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ── history ───────────────────────────────────────────────────
+
+function renderHistory() {
+    const container = document.getElementById('history-list');
+    if (state.log.length === 0) return;
+
+    // group by week, most recent first
+    const byWeek = {};
+    state.log.forEach(h => {
+        if (!byWeek[h.week]) byWeek[h.week] = [];
+        byWeek[h.week].push(h);
+    });
+
+    container.innerHTML = Object.entries(byWeek).reverse().map(([week, entries]) => `
+        <div class="history-week-group">
+            <div class="history-week-label">Week ${week}</div>
+            <div class="history-entries">
+                ${entries.map(h => `
+                    <div class="history-entry ${h.quality}">
+                        <span class="he-char">${h.charName}</span>
+                        <span class="he-arrow">→</span>
+                        <span class="he-choice">${h.label}: ${h.text}</span>
+                    </div>
+                `).join('')}
+            </div>
+        </div>
+    `).join('');
+}
+
+// ── completion ────────────────────────────────────────────────
+
+function showCompletion() {
+    document.getElementById('scenario-section').classList.add('hidden');
+
+    document.getElementById('final-chars').innerHTML = state.chars.map(char => {
+        const cells = Object.entries(char.metrics).map(([key, val]) => {
+            const v = Math.max(0, Math.min(100, val));
+            const cls = v >= 70 ? 'good' : v >= 45 ? 'mid' : 'bad';
+            return `<div class="fmc">
+                <div class="fmc-label">${METRIC_LABELS[key]}</div>
+                <div class="fmc-val ${cls}">${v}%</div>
+            </div>`;
+        }).join('');
+        return `<div class="final-char">
+            <div class="final-char-name">${char.avatar} ${char.name}</div>
+            <div class="final-metrics-row">${cells}</div>
+        </div>`;
+    }).join('');
+
+    const allVals = state.chars.flatMap(c => Object.values(c.metrics));
+    const avg     = allVals.reduce((a, b) => a + b, 0) / allVals.length;
+    const goodPct = state.log.filter(h => h.quality === 'good').length / state.log.length;
+
+    let cls, title, sub, text;
+    if (avg >= 70 && goodPct >= 0.6) {
+        cls = 'good'; title = "Effective manager";
+        sub  = "Strong leadership through uncertainty.";
+        text = "✏️ [WRITE EXCELLENT OUTCOME] You navigated the restructure with empathy and consistency. Your team's metrics reflect genuine re-engagement.";
+    } else if (avg >= 50) {
+        cls = 'neutral'; title = "Developing manager";
+        sub  = "A mixed performance with room to grow.";
+        text = "✏️ [WRITE MIXED OUTCOME] Some decisions landed well, others less so. Several team members still have unresolved concerns.";
+    } else {
+        cls = 'bad'; title = "Reactive management";
+        sub  = "The team struggled to recover.";
+        text = "✏️ [WRITE POOR OUTCOME] Several employees are actively disengaged. Reflect on what patterns emerged and what you'd do differently.";
+    }
+
+    document.getElementById('completion-sub').textContent    = sub;
+    document.getElementById('insight-title').textContent     = title;
+    document.getElementById('insight-text').textContent      = text;
+    document.getElementById('insight-box').className         = `insight-box ${cls}`;
+    document.getElementById('completion-modal').classList.add('visible');
+}
+
+function restartSim() {
+    document.getElementById('completion-modal').classList.remove('visible');
+    startSim();
+}
+</script>
 </body>
 </html>
