@@ -1128,7 +1128,7 @@ const WEEKS = [
 
         // Tom Brennan (3)
         {
-            situation: "Tom went from managing 3 people to having no direct reports. His attendance has dropped and a peer describes him as 'checked out'. This is week one — early action matters.",
+            situation: "Tom has been unusually quiet and hard to reach. While he is new to your team, you have worked together in the past, and have never seen him so unsure. The restructure and new role have both contributed to his stress.",
             options: [
                 {
                     label:   "Option A",
@@ -1161,19 +1161,19 @@ const WEEKS = [
                     impact:  { attendance: 15, responseSpeed: 10, deadlineCompletion: 5 },
                     feedback: {
                         type:  "good",
-                        title: "Title",
-                        body:  "Tom was surprised by the directness. It broke through his disengagement."
+                        title: "Communication bridges the gap",
+                        body:  "Tom was relieved to have an outlet without having to ask. You are able to talk through some of his immediate concerns."
                     }
                 },
                 {
                     label:   "Crisis B",
-                    text:    "[CRISIS] Escalate to HR and flag Tom as a retention risk.",
+                    text:    "[CRISIS] Escalate to HR and email Tom to say you've noticed he seems to be struggling, and that you are working on a plan to reduce his stress.",
                     quality: "neutral",
-                    impact:  { attendance: 0, responseSpeed: 0, deadlineCompletion: 5 },
+                    impact:  { attendance: 0, responseSpeed: -3, deadlineCompletion: 5 },
                     feedback: {
                         type:  "neutral",
-                        title: "Title",
-                        body:  "HR involvement creates a paper trail but feels bureaucratic. Tom notices."
+                        title: "Misguided",
+                        body:  "While Tom appreciates you noticing his struggle, involving HR and excluding him from the process doesn't re-engage him. He is now additionally worried about pleasing you."
                     }
                 }
             ]
