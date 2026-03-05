@@ -763,13 +763,13 @@
             <p>A management simulation</p>
         </header>
         <div class="intro-body">
-            <p>Your company has just gone through a major restructure. Roles have changed, teams have been reshuffled, and morale is uncertain.</p>
+            <p>Your company has just undergone a major restructure Roles have changed, teams have been reorganised, and current morale in the workplace is low. </p>
 
-            <p>You are the manager of a small team who handles escalated customer complaints. Over <strong>4 weeks</strong>, you'll manage four employees through the transition. Two employees were already in your team, and two employees have been transferred into your team. Click on their character profiles to learn more about them.</p>
+            <p>You are the manager of a small team that handles escalated customer complaints. Over <strong>4 weeks</strong>, you’ll manage four employees through this transition. Two employees were already in your team, and two employees have been transferred from other departments. Click on their character profiles to learn more about them.</p>
             
-            <p>Each week you'll face a situation with <strong>every team member</strong> — your choices shape their engagement. Understand their goals and needs to best guide them through this time.</p>
+            <p>Each week you must navigate a situation with <strong>every team member</strong>– your choices will affect their engagement at work. Understanding their goals and needs are crucial to guiding them successfully in this uncertain time.</p>
 
-            <p>Three metrics track each person: <strong>office attendance</strong>, <strong>message response speed</strong>, and <strong>deadline completion</strong>. Let someone slide into crisis and the options available to you will change.</p>
+            <p>Three metrics track each employee’s mood: <strong>office attendance</strong>, <strong>message response speed</strong>, and <strong>deadline completion</strong>.  Let someone escalate into crisis and the options available to you will change. </p>
         </div>
         <div class="intro-footer">
             <button class="btn btn-primary btn-lg" onclick="startSim()">Begin simulation</button>
@@ -903,8 +903,8 @@ const CHARACTERS = [
         },
         profile: {
             tenure: "6 years at the company",
-            bio:    "Angela joined as a mid-level technician and worked her way up due to her good technical and personal skills. She's a constant support for related teams and is always ready for the next challenge.",
-            change: "The restructure has been positively received by Angela, who sees opportunity in change. She's keen to dive into new things, and in doing so has quietly deprioritised some of her less engaging tasks.",
+            bio:    "Angela joined the company as a mid-level technician and has risen through the company due to her technical and personal skills. She consistently supports other teams and is always ready for the next challenge.",
+            change: "Angela has been positive about the restructure, as she sees the potential for new opportunities. She is keen to engage with new projects and thus has quietly deprioritised some of her less engaging tasks.",
             tags:   ["Communicator", "Technically skilled", "Change maker", "Fast-paced", "Cross-team network"]
         }
     },
@@ -920,8 +920,8 @@ const CHARACTERS = [
         },
         profile: {
             tenure: "4 months at the company",
-            bio:    "Marcus was hired to focus on customer success for a product that was removed from market during the restructure. He has landed with you as he has necessary skills for your team, but he's very nervous about the longevity of his position after big changes. He's enthusiastic, socially skilled, and keen to get started, but is very vulnerable to criticism at the moment.",
-            change: "His skills broadly cover this role, but this final stage of escalated issues is a new focus area for him.",
+            bio:    "Marcus was hired to focus on customer success for a product that was withdrawn from market during the restructure. He was reassigned as he has the necessary skills to support your team, but he is very nervous about the longevity of his position after these widespread changes. Marcus is enthusiastic, socially skilled, and keen to begin work, but is also very vulnerable to criticism.",
+            change: "Marcus’s skills are sufficient for his current role, but this final stage of escalated issues is a new focus area for him.",
             tags:   ["People-first", "Collaborative", "Needs clear direction", "Struggles with ambiguity", "High potential"]
         }
     },
@@ -933,12 +933,12 @@ const CHARACTERS = [
         metrics: {
             attendance:         80,
             responseSpeed:      75,
-            deadlineCompletion: 65
+            deadlineCompletion: 55
         },
         profile: {
             tenure: "4 years at the company",
-            bio:    "Priya is one of the most reliable members of the team. She rarely misses a deadline, and can be trusted to deliver on her deadlines and work independently, but struggles to communicate in the rare occasion something does go wrong.",
-            change: "Priya's role is technically unchanged, but she watched a restructure happen and hasn't had any of her load lightened. At risk of disconnect due to feeling unseen and unheard. Has a high level of respect for the senior technian Angela, but is nervous to ask her for help.",
+            bio:    "Priya is one of the most reliable members of your team. She rarely misses a deadline and can be trusted to work independently and deliver her projects. However, she can struggle to communicate issues on the occasion something does go wrong.",
+            change: "Priya’s role is technically unchanged, but after the restructure she is concerned about her workload. She is at risk of disconnecting from work after feeling unseen and unheard by the leadership team. Priya also has a high level of respect for the senior technician, Angela, but is reluctant to ask for help.",
             tags:   ["High ownership", "Risk-averse", "Overachiever under stress", "Values stability", "Proactive communicator"]
         }
     },
@@ -954,8 +954,8 @@ const CHARACTERS = [
         },
         profile: {
             tenure: "9 years at the company",
-            bio:    "Tom is one of the longest-serving members of the company. He worked for years as a customer success agent and put his hand up for more responsibilty for large and significant clients in this restructure. He has a lot of experience and respect within the company.",
-            change: "The restructure has given Tom the responsibility he has been asking for, but he is seemingly struggling to adapt in the new role and with the increase in pressure. You are confident he has the skills and knowledge to excel in the role, but he is yet to get there.",
+            bio:    "Tom is a veteran employee of the company. For years, he worked as a customer success agent and team lead, and volunteered for more responsibility during the restructure. His new role focuses on high-level and long standing clients, rather than the general pool he previously worked with. He has a lot of experience and is well-respected by the leadership team.",
+            change: "The restructure has given Tom the responsibility he requested, but he is struggling to adapt to the new role and the pressure to perform well. You are confident he has the skills to excel in this role, but he has yet to fully excel.",
             tags:   ["Institutional knowledge", "Fear of making mistakes", "Internally stressed", "Needs support", "Long-tenured"]
         }
     }
@@ -984,11 +984,11 @@ const WEEKS = [
     [
         // Angela Kim (0)
         {
-            situation: "Angela has responded well to the changes, and has some new ideas about how to streamline processes around identifying important cases. She is mentioning it to the other staff, and you sense their stress at being asked to contribute to another new initiative when they are already overloaded with the restructure.",
+            situation: "Angela has responded well to the recent changes in the company and has some new ideas about how to streamline identifying important cases. She is discussing these with other staff, and you observe their stress at contributing to another initiative with they are already overloaded with the restructure.",
             options: [
                 {
                     label:   "Option A",
-                    text:    "Schedule a 1:1 to talk through the ideas and put a plan in place for several months down the road. In the call, encourage her to use her time currently to help the new team members.",
+                    text:    "Schedule a 1:1 to discuss her ideas and put a plan in place for several months down the road. In the call, encourage her to prioritise acclimating the new team members to their roles.",
                     quality: "good",
                     impact:  { attendance: 10, responseSpeed: 5, deadlineCompletion: 5 },
                     feedback: {
@@ -999,7 +999,7 @@ const WEEKS = [
                 },
                 {
                     label:   "Option B",
-                    text:    "Send a message asking her to avoid mentioning new initiatives in group scenarios. Mention the other members of the team are stressed by it, and that she should take her position of seniority more seriously.",
+                    text:    "Send a message asking her to avoid mentioning new initiatives in group scenarios. Mention that other members of the team are stressed by it, and that she should take her senior position more seriously.",
                     quality: "bad",
                     impact:  { attendance: -8, responseSpeed: -10, deadlineCompletion: -7 },
                     feedback: {
@@ -1010,7 +1010,7 @@ const WEEKS = [
                 },
                 {
                     label:   "Option C",
-                    text:    "Check in with the rest of the team to discuss the options she is suggesting, and then privately tell her you will revist her ideas sometime in the future.",
+                    text:    "Check in with the rest of the team to discuss the options she is suggesting, and then privately tell her you will revisit her plan sometime later. ",
                     quality: "neutral",
                     impact:  { attendance: -5, responseSpeed: 0, deadlineCompletion: 5 },
                     feedback: {
@@ -1024,11 +1024,11 @@ const WEEKS = [
 
         // Marcus Webb (1)
         {
-            situation: "Marcus's response times have been terrible all week. A colleague tells you Marcus doesn't actually understand what his new role involves, but is too nervous to ask for help.",
+            situation: "Marcus’s response times have been terrible all week. A colleague informs you that Marcus doesn’t understand what his new role entails but is too nervous to ask Tom for help.",
             options: [
                 {
                     label:   "Option A",
-                    text:    "Escalate to HR to help you formally define the role. Let Marcus know you have set this in motion, and that he should direct any questions until then to Tom.",
+                    text:    "Tell Marcus to take initiative and work through their concerns. Email Tom and let him know to expect communication from Marcus.",
                     quality: "neutral",
                     impact:  { attendance: -3, responseSpeed: 2, deadlineCompletion: -2 },
                     feedback: {
@@ -1039,7 +1039,7 @@ const WEEKS = [
                 },
                 {
                     label:   "Option B",
-                    text:    "Tell Marcus to use their initiative and figure it out. Email Tom and let him know to expect communications from Marcus, and then leave them to get on with it.",
+                    text:    "Escalate to HR and formally define the role. Inform Marcus that you have taken action, and that he should direct further questions to Tom.",
                     quality: "bad",
                     impact:  { attendance: -7, responseSpeed: -10, deadlineCompletion: -8 },
                     feedback: {
@@ -1050,7 +1050,7 @@ const WEEKS = [
                 },
                    {
                     label:   "Option C",
-                    text:    "Co-create a clear role scope document together. Explain the relationship with Tom and encourage a mentor mentee relationship to develop.",
+                    text:    "Build a clear role scope document together and encourage Tom to be honest about his concerns without judgement.",
                     quality: "good",
                     impact:  { attendance: 5, responseSpeed: 15, deadlineCompletion: 10 },
                     feedback: {
@@ -1063,7 +1063,7 @@ const WEEKS = [
             crisisOptions: [
                 {
                     label:   "Crisis A",
-                    text:    "[CRISIS] Have a direct conversation today: 'I can see you're struggling — let's fix this together.'",
+                    text:    "Have a direct conversation today: 'I can see you're struggling — let's fix this together.'",
                     quality: "good",
                     impact:  { attendance: 8, responseSpeed: 12, deadlineCompletion: 8 },
                     feedback: {
@@ -1074,7 +1074,7 @@ const WEEKS = [
                 },
                 {
                     label:   "Crisis B",
-                    text:    "[CRISIS] Assign a senior colleague to shadow Marcus this week.",
+                    text:    "Assign a senior colleague to shadow Marcus this week.",
                     quality: "neutral",
                     impact:  { attendance: 5, responseSpeed: 8, deadlineCompletion: 5 },
                     feedback: {
@@ -1088,7 +1088,7 @@ const WEEKS = [
 
         // Priya Nair (2)
         {
-            situation: "Priya is online and in the office, but her deadline completions have started to slip. Knowing her workload is high, you plan to redistribute some of her tasks. Decide how to best broach the subject with her below.",
+            situation: "Priya is online and in the office, but her completion rate has started to slip. Knowing her workload is high, you plan to redistribute some of her tasks. You must initiate a conversation with her.",
             options: [
                 {
                     label:   "Option A",
@@ -1103,24 +1103,24 @@ const WEEKS = [
                 },
                 {
                     label:   "Option B",
-                    text:    "Acknowledge the uncertainty honestly without false promises.",
+                    text:    "Discuss reductions in workload with Priya over email and leave it to her to notify the other members of the team of the updated allocations.",
                     quality: "neutral",
                     impact:  { attendance: 0, responseSpeed: 5, deadlineCompletion: 5 },
                     feedback: {
                         type:  "neutral",
-                        title: "Title",
-                        body:  "Priya appreciated the honesty. Anxiety reduced slightly but didn't disappear."
+                        title: "Guidance needed",
+                        body:  "Priya appreciated the involvement in the decision making, but felt unprepared to inform her coworkers of your decision."
                     }
                 },
                 {
                     label:   "Option C",
-                    text:    "Tell her to focus on her work and not worry about things outside her control.",
-                    quality: "bad",
-                    impact:  { attendance: -5, responseSpeed: -5, deadlineCompletion: -8 },
+                    text:    "Organise a time to meet with her and discuss which tasks can be reallocated. Announce the changes in a team meeting.",
+                    quality: "good",
+                    impact:  { attendance: 5, responseSpeed: 7, deadlineCompletion: 4 },
                     feedback: {
-                        type:  "bad",
-                        title: "Title",
-                        body:  "Priya felt dismissed. Her anxiety increased."
+                        type:  "good",
+                        title: "Balance",
+                        body:  "Involving Priya in decision making about her work but announcing the changes yourself allows her to voice her opinion directly while you retain management responsibility and authority."
                     }
                 }
             ]
@@ -1156,7 +1156,7 @@ const WEEKS = [
             crisisOptions: [
                 {
                     label:   "Crisis A",
-                    text:    "[CRISIS] Sit down with Tom today: 'I'm worried about you. What do you need from me right now?'",
+                    text:    "Sit down with Tom today: 'I'm worried about you. What do you need from me right now?'",
                     quality: "good",
                     impact:  { attendance: 15, responseSpeed: 10, deadlineCompletion: 5 },
                     feedback: {
@@ -1167,12 +1167,12 @@ const WEEKS = [
                 },
                 {
                     label:   "Crisis B",
-                    text:    "[CRISIS] Escalate to HR and email Tom to say you've noticed he seems to be struggling, and that you are working on a plan to reduce his stress.",
+                    text:    "Escalate to HR and email Tom to say you've noticed he seems to be struggling, and that you are working on a plan to reduce his stress.",
                     quality: "neutral",
                     impact:  { attendance: 0, responseSpeed: -3, deadlineCompletion: 5 },
                     feedback: {
                         type:  "neutral",
-                        title: "Misguided",
+                        title: "Missed the mark",
                         body:  "While Tom appreciates you noticing his struggle, involving HR and excluding him from the process doesn't re-engage him. He is now additionally worried about pleasing you."
                     }
                 }
@@ -1184,63 +1184,39 @@ const WEEKS = [
     [
         // Angela Kim (0)
         {
-            situation: "Angela is back in the office but seems to be doing the minimum. They've been skipping optional team stand-ups. A peer says Angela feels 'sidelined'.",
+            situation: "Angela has returned her focus to her current tasks, and is engaging well with the new challenges. You want to capitalise on her high skill level for the team at large, but you know Angela has specifically asked not to be given managerial responsibility.",
             options: [
                 {
                     label:   "Option A",
-                    text:    "Give Angela ownership of a small visible project to rebuild purpose.",
+                    text:    "Ask Angela to include more details in her case documentation so other staff can learn from her cases after the fact.",
                     quality: "good",
-                    impact:  { attendance: 8, responseSpeed: 8, deadlineCompletion: 10 },
+                    impact:  { attendance: 8, responseSpeed: 8, deadlineCompletion: 5 },
                     feedback: {
                         type:  "good",
-                        title: "Title",
-                        body:  "Having something meaningful to own shifted Angela's attitude noticeably."
+                        title: "Planning for the future",
+                        body:  "Angela acknowledges this will assist her colleagues present and future, and agrees to make the time to add notations."
                     }
                 },
                 {
                     label:   "Option B",
-                    text:    "Make attendance at stand-ups mandatory for the whole team.",
+                    text:    "Ask Angela to run a couple of webinars with the rest of the team to explain her processes and encourage ",
                     quality: "bad",
                     impact:  { attendance: 5, responseSpeed: -5, deadlineCompletion: -5 },
                     feedback: {
                         type:  "bad",
-                        title: "Title",
-                        body:  "Angela complies but feels micromanaged. Team morale dips."
+                        title: "Overexposed",
+                        body:  "Angela complies but struggles to engage her teammates over webinar. The skills don't transfer and her confidence takes a hit."
                     }
                 },
                 {
                     label:   "Option C",
-                    text:    "Ask Angela to mentor one of the junior team members.",
+                    text:    "Discuss Angela's processes more in depth in your meetings, and create your own learning materials based on them.",
                     quality: "neutral",
                     impact:  { attendance: 5, responseSpeed: 5, deadlineCompletion: 5 },
                     feedback: {
                         type:  "neutral",
-                        title: "Title",
-                        body:  "Angela appreciates the gesture but it doesn't fully replace the leadership they lost."
-                    }
-                }
-            ],
-            crisisOptions: [
-                {
-                    label:   "Crisis A",
-                    text:    "[CRISIS] Have a direct conversation about whether Angela wants to stay on the team.",
-                    quality: "good",
-                    impact:  { attendance: 10, responseSpeed: 8, deadlineCompletion: 8 },
-                    feedback: {
-                        type:  "good",
-                        title: "Title",
-                        body:  "The directness shook Angela out of passivity. They recommitted."
-                    }
-                },
-                {
-                    label:   "Crisis B",
-                    text:    "[CRISIS] Reduce Angela's workload and check in daily for a week.",
-                    quality: "neutral",
-                    impact:  { attendance: 5, responseSpeed: 5, deadlineCompletion: 0 },
-                    feedback: {
-                        type:  "neutral",
-                        title: "Title",
-                        body:  "The support helped, but Angela needs purpose, not less work."
+                        title: "Outsourced",
+                        body:  "Angela appreciates that she is not being asked to directly train staff, but worries the double handling will mean more work for her in the future to explain these documents."
                     }
                 }
             ]
@@ -1248,7 +1224,7 @@ const WEEKS = [
 
         // Marcus Webb (1)
         {
-            situation: "Marcus missed a deadline this week — the first time. They apologised but gave no explanation. You sense overwhelm rather than carelessness.",
+            situation: "For the first time since joining the company, Marcus has missed a deadline. They apologised but offered no other explanation. You observe that Marcus has been stressed rather than careless.",
             options: [
                 {
                     label:   "Option A",
@@ -1263,48 +1239,48 @@ const WEEKS = [
                 },
                 {
                     label:   "Option B",
-                    text:    "Send a formal note flagging that missed deadlines are unacceptable.",
+                    text:    "Send a formal note flagging that missed deadlines are unacceptable, and restating your expectations.",
                     quality: "bad",
                     impact:  { attendance: -5, responseSpeed: -8, deadlineCompletion: -10 },
                     feedback: {
                         type:  "bad",
-                        title: "Title",
-                        body:  "Marcus shuts down. The formality felt targeted, not supportive."
+                        title: "Impersonal",
+                        body:  "Marcus shuts down. His fear of making mistakes is paralysing, and he is not confident reaching out for support from anyone now."
                     }
                 },
                 {
                     label:   "Option C",
-                    text:    "Suggest Marcus use a task management tool to get more organised.",
+                    text:    "Suggest Marcus use a task management tool to get more organised. Schedule some time in his calendar to focus on this.",
                     quality: "neutral",
                     impact:  { attendance: 0, responseSpeed: 5, deadlineCompletion: 5 },
                     feedback: {
                         type:  "neutral",
-                        title: "Title",
-                        body:  "Mildly helpful. Doesn't address the stakeholder overload problem."
+                        title: "Distracting",
+                        body:  "While not unhelpful, this misses that the cause of the deadline is the lack of clarity and process understanding."
                     }
                 }
             ],
             crisisOptions: [
                 {
                     label:   "Crisis A",
-                    text:    "[CRISIS] Temporarily reduce Marcus's task load and build a recovery plan together.",
+                    text:    "Temporarily reduce Marcus's task load and build a recovery plan together.",
                     quality: "good",
                     impact:  { attendance: 5, responseSpeed: 10, deadlineCompletion: 12 },
                     feedback: {
                         type:  "good",
-                        title: "Title",
-                        body:  "The reduced load gives Marcus space to stabilise and rebuild confidence."
+                        title: "Planning for success",
+                        body:  "The reduced load gives Marcus space to stabilise and rebuild confidence, and involving him in the plan increases trust."
                     }
                 },
                 {
                     label:   "Crisis B",
-                    text:    "[CRISIS] Loop in your own manager for advice on how to handle this.",
+                    text:    "Loop in your own manager for advice on how to handle this.",
                     quality: "neutral",
-                    impact:  { attendance: 0, responseSpeed: 0, deadlineCompletion: 5 },
+                    impact:  { attendance: 0, responseSpeed: -3, deadlineCompletion: 5 },
                     feedback: {
                         type:  "neutral",
-                        title: "Title",
-                        body:  "Useful for you, but Marcus notices being escalated over and feels less trusted."
+                        title: "Extended stress",
+                        body:  "Useful for you, but Marcus feels being palmed off is an indication he is hard to manage, increasing his wariness to engage in the role fully."
                     }
                 }
             ]
@@ -1312,27 +1288,27 @@ const WEEKS = [
 
         // Priya Nair (2)
         {
-            situation: "Priya has been arriving early and leaving late. Her output is excellent but she looks exhausted. You're concerned she's running on anxiety rather than motivation.",
+            situation: "Priya has been arriving early and leaving late. Her output quality is excellent, but she looks exhausted. You’re concerned that she’s more anxious than motivated.",
             options: [
                 {
                     label:   "Option A",
-                    text:    "Name what you're observing: 'I'm noticing you seem stretched. How are you actually doing?'",
+                    text:    "Acknowledge what you’re observing: “I noticed you seem overworked. How are you actually doing?”",
                     quality: "good",
                     impact:  { attendance: 5, responseSpeed: 5, deadlineCompletion: 5 },
                     feedback: {
                         type:  "good",
-                        title: "Title",
-                        body:  "Priya needed someone to notice. She leaves on time the rest of the week."
+                        title: "Redirecting effort",
+                        body:  "Priya shares her feeling of overwhelm is due to struggling to adapt to some new processes. You provide more direction and the overworking reduces."
                     }
                 },
                 {
                     label:   "Option B",
                     text:    "Praise her work rate and use her as an example to the team.",
                     quality: "bad",
-                    impact:  { attendance: 0, responseSpeed: -5, deadlineCompletion: -8 },
+                    impact:  { attendance: -8, responseSpeed: -7, deadlineCompletion: -8 },
                     feedback: {
                         type:  "bad",
-                        title: "Title",
+                        title: "Encouraging bad habits",
                         body:  "Priya feels pressure to maintain an unsustainable pace. Burnout risk increases."
                     }
                 },
@@ -1340,11 +1316,35 @@ const WEEKS = [
                     label:   "Option C",
                     text:    "Set a team norm: no emails after 6pm.",
                     quality: "neutral",
-                    impact:  { attendance: 0, responseSpeed: 5, deadlineCompletion: 0 },
+                    impact:  { attendance: 0, responseSpeed: 5, deadlineCompletion: -5 },
                     feedback: {
                         type:  "neutral",
-                        title: "Title",
-                        body:  "The boundary helps, but the anxiety underneath remains."
+                        title: "Bandaid solution",
+                        body:  "The boundary helps, but the anxiety underneath remains. Priya's overwork is due to misunderstanding a new process, and is now under additional time pressures."
+                    }
+                }
+            ],
+            crisisOptions: [
+                {
+                    label:   "Crisis A",
+                    text:    "Have a direct conversation about if Priya is coping ok with the changes.",
+                    quality: "good",
+                    impact:  { attendance: 10, responseSpeed: 8, deadlineCompletion: 8 },
+                    feedback: {
+                        type:  "good",
+                        title: "Clearing the air",
+                        body:  "The directness allows Priya to explain her feeling of overwhelm is due to struggling to adapt to some new processes. You provide more direction and the overworking reduces.."
+                    }
+                },
+                {
+                    label:   "Crisis B",
+                    text:    "Reduce Priya's workload immediately and check in daily for a week.",
+                    quality: "neutral",
+                    impact:  { attendance: 5, responseSpeed: 5, deadlineCompletion: 0 },
+                    feedback: {
+                        type:  "neutral",
+                        title: "Overkill",
+                        body:  "The support helped, and has allowed Priya to explain her struggles with some of the new processes, which you can help with. However, reducing her workload directly before speaking to her takes some of her agency away when she is already feeling disempowered by the changes."
                     }
                 }
             ]
@@ -1391,7 +1391,7 @@ const WEEKS = [
             crisisOptions: [
                 {
                     label:   "Crisis A",
-                    text:    "[CRISIS] Tell Tom plainly: 'I'm going to have to escalate this if things don't change. I don't want to. What do you need?'",
+                    text:    "Tell Tom plainly: 'I'm going to have to escalate this if things don't change. I don't want to. What do you need?'",
                     quality: "good",
                     impact:  { attendance: 10, responseSpeed: 8, deadlineCompletion: 8 },
                     feedback: {
@@ -1402,7 +1402,7 @@ const WEEKS = [
                 },
                 {
                     label:   "Crisis B",
-                    text:    "[CRISIS] Escalate to HR immediately without warning Tom first.",
+                    text:    "Escalate to HR immediately without warning Tom first.",
                     quality: "bad",
                     impact:  { attendance: -5, responseSpeed: -8, deadlineCompletion: -5 },
                     feedback: {
@@ -1420,107 +1420,67 @@ const WEEKS = [
     [
         // Angela Kim (0)
         {
-            situation: "[WEEK 3 — Angela Kim] Write situation here.",
+            situation: "In the last week, Angela has been overly involved in the workload of another team, who were assigned some of her previous duties during the restructuring. Although Angela is experienced and attentive, you notice that her involvement has been upsetting the members of that team.",
             options: [
-                {
-                    label:   "Option A",
-                    text:    "Write option.",
-                    quality: "good",
-                    impact:  { attendance: 8, responseSpeed: 8, deadlineCompletion: 8 },
-                    feedback: { type: "good", title: "", body: "" }
-                },
+               
                 {
                     label:   "Option B",
-                    text:    "Write option.",
+                    text:    "Tell Angela that she’s doing good work, but encourage her to speak to the team via their manager.",
                     quality: "neutral",
                     impact:  { attendance: 3, responseSpeed: 3, deadlineCompletion: 3 },
-                    feedback: { type: "neutral", title: "", body: "" }
+                    feedback: { 
+                        type: "neutral", 
+                        title: "Obscured intentions", 
+                        body: "Angela is confused by this, but complies. " }
+                },
+                 {
+                    label:   "Option A",
+                    text:    "Speak with Angela about how she is engaging members of the team.",
+                    quality: "good",
+                    impact:  { attendance: 8, responseSpeed: 8, deadlineCompletion: 6 },
+                    feedback: { 
+                        type: "good", 
+                        title: "Back to the source",
+                        body: "Angela appreciates you coming directly to her, and you work together on her approach. You find the issue is misalignment on new procedures." }
                 },
                 {
                     label:   "Option C",
-                    text:    "Write option.",
+                    text:    "Speak with the team’s manager, and come back to Angela with their complaints and recommend she direct her communications to the manager only. ",
                     quality: "bad",
                     impact:  { attendance: -5, responseSpeed: -5, deadlineCompletion: -5 },
-                    feedback: { type: "bad", title: "", body: "" }
+                    feedback: { 
+                        type: "bad", 
+                        title: "Taken for granted.", 
+                        body: "Angela is upset by this approach, and feels her good intentions and experience are being taken for granted." }
                 }
             ],
             crisisOptions: [
                 {
                     label:   "Crisis A",
-                    text:    "[CRISIS] Write crisis option.",
-                    quality: "good",
-                    impact:  { attendance: 10, responseSpeed: 5, deadlineCompletion: 5 },
-                    feedback: { type: "good", title: "", body: "" }
+                    text:    "Cancel her work with the other team to avoid further issues.",
+                    quality: "bad",
+                    impact:  { attendance: -10, responseSpeed: -5, deadlineCompletion: -5 },
+                    feedback: { 
+                        type: "bad", 
+                        title: "Disrespected.", 
+                        body: "Angela is distressed by being removed with no warning. She has worked with other teams previously in the business, and just needed some time to adjust to new procedures." }
                 },
                 {
                     label:   "Crisis B",
-                    text:    "[CRISIS] Write crisis option.",
-                    quality: "neutral",
-                    impact:  { attendance: 5, responseSpeed: 3, deadlineCompletion: 3 },
-                    feedback: { type: "neutral", title: "", body: "" }
+                    text:    "Schedule a 1-on-1 with Angela today and discuss the issues raised.",
+                    quality: "good",
+                    impact:  { attendance: 5, responseSpeed: 8, deadlineCompletion: 3 },
+                    feedback: { 
+                        type: "good", 
+                        title: "Communication is key.", 
+                        body: "Angela is suprised at first, but discussing the team you both find the issue is misalignment on procedures. She has worked with other teams previously in the business, and just needed some time to adjust to new procedures." }
                 }
             ]
         },
 
         // Marcus Webb (1)
         {
-            situation: "[WEEK 3 — Marcus Webb] Write situation here.",
-            options: [
-                {
-                    label:   "Option A",
-                    text:    "Write option.",
-                    quality: "good",
-                    impact:  { attendance: 8, responseSpeed: 8, deadlineCompletion: 8 },
-                    feedback: { type: "good", title: "", body: "" }
-                },
-                {
-                    label:   "Option B",
-                    text:    "Write option.",
-                    quality: "neutral",
-                    impact:  { attendance: 3, responseSpeed: 3, deadlineCompletion: 3 },
-                    feedback: { type: "neutral", title: "", body: "" }
-                },
-                {
-                    label:   "Option C",
-                    text:    "Write option.",
-                    quality: "bad",
-                    impact:  { attendance: -5, responseSpeed: -5, deadlineCompletion: -5 },
-                    feedback: { type: "bad", title: "", body: "" }
-                }
-            ]
-        },
-
-        // Priya Nair (2)
-        {
-            situation: "[WEEK 3 — Priya Nair] Write situation here.",
-            options: [
-                {
-                    label:   "Option A",
-                    text:    "Write option.",
-                    quality: "good",
-                    impact:  { attendance: 8, responseSpeed: 8, deadlineCompletion: 8 },
-                    feedback: { type: "good", title: "", body: "" }
-                },
-                {
-                    label:   "Option B",
-                    text:    "Write option.",
-                    quality: "neutral",
-                    impact:  { attendance: 3, responseSpeed: 3, deadlineCompletion: 3 },
-                    feedback: { type: "neutral", title: "", body: "" }
-                },
-                {
-                    label:   "Option C",
-                    text:    "Write option.",
-                    quality: "bad",
-                    impact:  { attendance: -5, responseSpeed: -5, deadlineCompletion: -5 },
-                    feedback: { type: "bad", title: "", body: "" }
-                }
-            ]
-        },
-
-        // Tom Brennan (3)
-        {
-            situation: "[WEEK 3 — Tom Brennan] Write situation here.",
+            situation: "During a call, Marcus gives the client outdated information and struggles to answer their questions. After the call, the client requests that the company honour what Marcus had told them.",
             options: [
                 {
                     label:   "Option A",
@@ -1547,14 +1507,118 @@ const WEEKS = [
             crisisOptions: [
                 {
                     label:   "Crisis A",
-                    text:    "[CRISIS] Write crisis option.",
+                    text:    "Tell Tom plainly: 'I'm going to have to escalate this if things don't change. I don't want to. What do you need?'",
+                    quality: "good",
+                    impact:  { attendance: 10, responseSpeed: 8, deadlineCompletion: 8 },
+                    feedback: {
+                        type:  "good",
+                        title: "Title",
+                        body:  "Tom hears the gravity of the situation. He asks for a role review. You start one."
+                    }
+                },
+                {
+                    label:   "Crisis B",
+                    text:    "Escalate to HR immediately without warning Tom first.",
+                    quality: "bad",
+                    impact:  { attendance: -5, responseSpeed: -8, deadlineCompletion: -5 },
+                    feedback: {
+                        type:  "bad",
+                        title: "Title",
+                        body:  "Tom feels blindsided. Any remaining trust is gone."
+                    }
+                }
+            ]
+        },
+
+        // Priya Nair (2)
+        {
+            situation: "While working independently on a project, Priya changed an authorised process so the project could be completed on time. Although Priya meets the deadline, the project is flagged by the leadership team, and you are asked to justify the change.",
+            options: [
+                {
+                    label:   "Option A",
+                    text:    "Write option.",
+                    quality: "good",
+                    impact:  { attendance: 8, responseSpeed: 8, deadlineCompletion: 8 },
+                    feedback: { type: "good", title: "", body: "" }
+                },
+                {
+                    label:   "Option B",
+                    text:    "Write option.",
+                    quality: "neutral",
+                    impact:  { attendance: 3, responseSpeed: 3, deadlineCompletion: 3 },
+                    feedback: { type: "neutral", title: "", body: "" }
+                },
+                {
+                    label:   "Option C",
+                    text:    "Write option.",
+                    quality: "bad",
+                    impact:  { attendance: -5, responseSpeed: -5, deadlineCompletion: -5 },
+                    feedback: { type: "bad", title: "", body: "" }
+                }
+            ],
+            crisisOptions: [
+                {
+                    label:   "Crisis A",
+                    text:    "Tell Tom plainly: 'I'm going to have to escalate this if things don't change. I don't want to. What do you need?'",
+                    quality: "good",
+                    impact:  { attendance: 10, responseSpeed: 8, deadlineCompletion: 8 },
+                    feedback: {
+                        type:  "good",
+                        title: "Title",
+                        body:  "Tom hears the gravity of the situation. He asks for a role review. You start one."
+                    }
+                },
+                {
+                    label:   "Crisis B",
+                    text:    "Escalate to HR immediately without warning Tom first.",
+                    quality: "bad",
+                    impact:  { attendance: -5, responseSpeed: -8, deadlineCompletion: -5 },
+                    feedback: {
+                        type:  "bad",
+                        title: "Title",
+                        body:  "Tom feels blindsided. Any remaining trust is gone."
+                    }
+                }
+            ]
+        },
+
+        // Tom Brennan (3)
+        {
+            situation: "Tom has noticed that one of his previous reports had made a mistake during a client call and decided to correct the mistake without informing anyone on your team.  ",
+            options: [
+                {
+                    label:   "Option A",
+                    text:    "Write option.",
+                    quality: "good",
+                    impact:  { attendance: 8, responseSpeed: 8, deadlineCompletion: 8 },
+                    feedback: { type: "good", title: "", body: "" }
+                },
+                {
+                    label:   "Option B",
+                    text:    "Write option.",
+                    quality: "neutral",
+                    impact:  { attendance: 3, responseSpeed: 3, deadlineCompletion: 3 },
+                    feedback: { type: "neutral", title: "", body: "" }
+                },
+                {
+                    label:   "Option C",
+                    text:    "Write option.",
+                    quality: "bad",
+                    impact:  { attendance: -5, responseSpeed: -5, deadlineCompletion: -5 },
+                    feedback: { type: "bad", title: "", body: "" }
+                }
+            ],
+            crisisOptions: [
+                {
+                    label:   "Crisis A",
+                    text:    "Write crisis option.",
                     quality: "good",
                     impact:  { attendance: 10, responseSpeed: 5, deadlineCompletion: 5 },
                     feedback: { type: "good", title: "", body: "" }
                 },
                 {
                     label:   "Crisis B",
-                    text:    "[CRISIS] Write crisis option.",
+                    text:    "Write crisis option.",
                     quality: "neutral",
                     impact:  { attendance: 5, responseSpeed: 3, deadlineCompletion: 3 },
                     feedback: { type: "neutral", title: "", body: "" }
@@ -1567,7 +1631,7 @@ const WEEKS = [
     [
         // Angela Kim (0)
         {
-            situation: "[WEEK 4 — Angela Kim] Write situation here.",
+            situation: "final scenario",
             options: [
                 {
                     label:   "Option A",
@@ -1595,7 +1659,7 @@ const WEEKS = [
 
         // Marcus Webb (1)
         {
-            situation: "[WEEK 4 — Marcus Webb] Write situation here.",
+            situation: "Marcus has received criticism about his performance from a member of the leadership team and is now struggling with his confidence. The team leader meant well, but also did not offer any practical criticisms that Marcus can use to improve.",
             options: [
                 {
                     label:   "Option A",
@@ -1617,13 +1681,37 @@ const WEEKS = [
                     quality: "bad",
                     impact:  { attendance: -5, responseSpeed: -5, deadlineCompletion: -5 },
                     feedback: { type: "bad", title: "", body: "" }
+                }
+            ],
+            crisisOptions: [
+                {
+                    label:   "Crisis A",
+                    text:    "Tell Tom plainly: 'I'm going to have to escalate this if things don't change. I don't want to. What do you need?'",
+                    quality: "good",
+                    impact:  { attendance: 10, responseSpeed: 8, deadlineCompletion: 8 },
+                    feedback: {
+                        type:  "good",
+                        title: "Title",
+                        body:  "Tom hears the gravity of the situation. He asks for a role review. You start one."
+                    }
+                },
+                {
+                    label:   "Crisis B",
+                    text:    "Escalate to HR immediately without warning Tom first.",
+                    quality: "bad",
+                    impact:  { attendance: -5, responseSpeed: -8, deadlineCompletion: -5 },
+                    feedback: {
+                        type:  "bad",
+                        title: "Title",
+                        body:  "Tom feels blindsided. Any remaining trust is gone."
+                    }
                 }
             ]
         },
 
         // Priya Nair (2)
         {
-            situation: "[WEEK 4 — Priya Nair] Write situation here.",
+            situation: "After receiving feedback for her previous project, Priya is now reluctant to work independently and is disengaged at work. When offered the opportunity to complete an important task for a client, she is resistant.",
             options: [
                 {
                     label:   "Option A",
@@ -1645,13 +1733,37 @@ const WEEKS = [
                     quality: "bad",
                     impact:  { attendance: -5, responseSpeed: -5, deadlineCompletion: -5 },
                     feedback: { type: "bad", title: "", body: "" }
+                }
+            ],
+            crisisOptions: [
+                {
+                    label:   "Crisis A",
+                    text:    "Tell Tom plainly: 'I'm going to have to escalate this if things don't change. I don't want to. What do you need?'",
+                    quality: "good",
+                    impact:  { attendance: 10, responseSpeed: 8, deadlineCompletion: 8 },
+                    feedback: {
+                        type:  "good",
+                        title: "Title",
+                        body:  "Tom hears the gravity of the situation. He asks for a role review. You start one."
+                    }
+                },
+                {
+                    label:   "Crisis B",
+                    text:    "Escalate to HR immediately without warning Tom first.",
+                    quality: "bad",
+                    impact:  { attendance: -5, responseSpeed: -8, deadlineCompletion: -5 },
+                    feedback: {
+                        type:  "bad",
+                        title: "Title",
+                        body:  "Tom feels blindsided. Any remaining trust is gone."
+                    }
                 }
             ]
         },
 
         // Tom Brennan (3)
         {
-            situation: "[WEEK 4 — Tom Brennan] Write situation here.",
+            situation: "Tom has a meeting with an important client that he previously struggled to effectively communicate with. He is feeling immense pressure to perform well, which is affecting his relationships with other clients.",
             options: [
                 {
                     label:   "Option A",
@@ -1674,469 +1786,33 @@ const WEEKS = [
                     impact:  { attendance: -5, responseSpeed: -5, deadlineCompletion: -5 },
                     feedback: { type: "bad", title: "", body: "" }
                 }
+            ],
+            crisisOptions: [
+                {
+                    label:   "Crisis A",
+                    text:    "Tell Tom plainly: 'I'm going to have to escalate this if things don't change. I don't want to. What do you need?'",
+                    quality: "good",
+                    impact:  { attendance: 10, responseSpeed: 8, deadlineCompletion: 8 },
+                    feedback: {
+                        type:  "good",
+                        title: "Title",
+                        body:  "Tom hears the gravity of the situation. He asks for a role review. You start one."
+                    }
+                },
+                {
+                    label:   "Crisis B",
+                    text:    "Escalate to HR immediately without warning Tom first.",
+                    quality: "bad",
+                    impact:  { attendance: -5, responseSpeed: -8, deadlineCompletion: -5 },
+                    feedback: {
+                        type:  "bad",
+                        title: "Title",
+                        body:  "Tom feels blindsided. Any remaining trust is gone."
+                    }
+                }
             ]
         }
     ]
-
-    // // ══ WEEK 5 ══════════════════════════════════════════════════
-    // [
-    //     // Angela Kim (0)
-    //     {
-    //         situation: "[WEEK 5 — Angela Kim] Write situation here.",
-    //         options: [
-    //             {
-    //                 label:   "Option A",
-    //                 text:    "Write option.",
-    //                 quality: "good",
-    //                 impact:  { attendance: 8, responseSpeed: 8, deadlineCompletion: 8 },
-    //                 feedback: { type: "good", title: "", body: "" }
-    //             },
-    //             {
-    //                 label:   "Option B",
-    //                 text:    "Write option.",
-    //                 quality: "neutral",
-    //                 impact:  { attendance: 3, responseSpeed: 3, deadlineCompletion: 3 },
-    //                 feedback: { type: "neutral", title: "", body: "" }
-    //             },
-    //             {
-    //                 label:   "Option C",
-    //                 text:    "Write option.",
-    //                 quality: "bad",
-    //                 impact:  { attendance: -5, responseSpeed: -5, deadlineCompletion: -5 },
-    //                 feedback: { type: "bad", title: "", body: "" }
-    //             }
-    //         ]
-    //     },
-
-    //     // Marcus Webb (1)
-    //     {
-    //         situation: "[WEEK 5 — Marcus Webb] Write situation here.",
-    //         options: [
-    //             {
-    //                 label:   "Option A",
-    //                 text:    "Write option.",
-    //                 quality: "good",
-    //                 impact:  { attendance: 8, responseSpeed: 8, deadlineCompletion: 8 },
-    //                 feedback: { type: "good", title: "", body: "" }
-    //             },
-    //             {
-    //                 label:   "Option B",
-    //                 text:    "Write option.",
-    //                 quality: "neutral",
-    //                 impact:  { attendance: 3, responseSpeed: 3, deadlineCompletion: 3 },
-    //                 feedback: { type: "neutral", title: "", body: "" }
-    //             },
-    //             {
-    //                 label:   "Option C",
-    //                 text:    "Write option.",
-    //                 quality: "bad",
-    //                 impact:  { attendance: -5, responseSpeed: -5, deadlineCompletion: -5 },
-    //                 feedback: { type: "bad", title: "", body: "" }
-    //             }
-    //         ]
-    //     },
-
-    //     // Priya Nair (2)
-    //     {
-    //         situation: "[WEEK 5 — Priya Nair] Write situation here.",
-    //         options: [
-    //             {
-    //                 label:   "Option A",
-    //                 text:    "Write option.",
-    //                 quality: "good",
-    //                 impact:  { attendance: 8, responseSpeed: 8, deadlineCompletion: 8 },
-    //                 feedback: { type: "good", title: "", body: "" }
-    //             },
-    //             {
-    //                 label:   "Option B",
-    //                 text:    "Write option.",
-    //                 quality: "neutral",
-    //                 impact:  { attendance: 3, responseSpeed: 3, deadlineCompletion: 3 },
-    //                 feedback: { type: "neutral", title: "", body: "" }
-    //             },
-    //             {
-    //                 label:   "Option C",
-    //                 text:    "Write option.",
-    //                 quality: "bad",
-    //                 impact:  { attendance: -5, responseSpeed: -5, deadlineCompletion: -5 },
-    //                 feedback: { type: "bad", title: "", body: "" }
-    //             }
-    //         ]
-    //     },
-
-    //     // Tom Brennan (3)
-    //     {
-    //         situation: "[WEEK 5 — Tom Brennan] Write situation here.",
-    //         options: [
-    //             {
-    //                 label:   "Option A",
-    //                 text:    "Write option.",
-    //                 quality: "good",
-    //                 impact:  { attendance: 8, responseSpeed: 8, deadlineCompletion: 8 },
-    //                 feedback: { type: "good", title: "", body: "" }
-    //             },
-    //             {
-    //                 label:   "Option B",
-    //                 text:    "Write option.",
-    //                 quality: "neutral",
-    //                 impact:  { attendance: 3, responseSpeed: 3, deadlineCompletion: 3 },
-    //                 feedback: { type: "neutral", title: "", body: "" }
-    //             },
-    //             {
-    //                 label:   "Option C",
-    //                 text:    "Write option.",
-    //                 quality: "bad",
-    //                 impact:  { attendance: -5, responseSpeed: -5, deadlineCompletion: -5 },
-    //                 feedback: { type: "bad", title: "", body: "" }
-    //             }
-    //         ]
-    //     }
-    // ],
-
-    // // ══ WEEK 6 ══════════════════════════════════════════════════
-    // [
-    //     // Angela Kim (0)
-    //     {
-    //         situation: "[WEEK 6 — Angela Kim] Write situation here.",
-    //         options: [
-    //             {
-    //                 label:   "Option A",
-    //                 text:    "Write option.",
-    //                 quality: "good",
-    //                 impact:  { attendance: 8, responseSpeed: 8, deadlineCompletion: 8 },
-    //                 feedback: { type: "good", title: "", body: "" }
-    //             },
-    //             {
-    //                 label:   "Option B",
-    //                 text:    "Write option.",
-    //                 quality: "neutral",
-    //                 impact:  { attendance: 3, responseSpeed: 3, deadlineCompletion: 3 },
-    //                 feedback: { type: "neutral", title: "", body: "" }
-    //             },
-    //             {
-    //                 label:   "Option C",
-    //                 text:    "Write option.",
-    //                 quality: "bad",
-    //                 impact:  { attendance: -5, responseSpeed: -5, deadlineCompletion: -5 },
-    //                 feedback: { type: "bad", title: "", body: "" }
-    //             }
-    //         ]
-    //     },
-
-    //     // Marcus Webb (1)
-    //     {
-    //         situation: "[WEEK 6 — Marcus Webb] Write situation here.",
-    //         options: [
-    //             {
-    //                 label:   "Option A",
-    //                 text:    "Write option.",
-    //                 quality: "good",
-    //                 impact:  { attendance: 8, responseSpeed: 8, deadlineCompletion: 8 },
-    //                 feedback: { type: "good", title: "", body: "" }
-    //             },
-    //             {
-    //                 label:   "Option B",
-    //                 text:    "Write option.",
-    //                 quality: "neutral",
-    //                 impact:  { attendance: 3, responseSpeed: 3, deadlineCompletion: 3 },
-    //                 feedback: { type: "neutral", title: "", body: "" }
-    //             },
-    //             {
-    //                 label:   "Option C",
-    //                 text:    "Write option.",
-    //                 quality: "bad",
-    //                 impact:  { attendance: -5, responseSpeed: -5, deadlineCompletion: -5 },
-    //                 feedback: { type: "bad", title: "", body: "" }
-    //             }
-    //         ]
-    //     },
-
-    //     // Priya Nair (2)
-    //     {
-    //         situation: "[WEEK 6 — Priya Nair] Write situation here.",
-    //         options: [
-    //             {
-    //                 label:   "Option A",
-    //                 text:    "Write option.",
-    //                 quality: "good",
-    //                 impact:  { attendance: 8, responseSpeed: 8, deadlineCompletion: 8 },
-    //                 feedback: { type: "good", title: "", body: "" }
-    //             },
-    //             {
-    //                 label:   "Option B",
-    //                 text:    "Write option.",
-    //                 quality: "neutral",
-    //                 impact:  { attendance: 3, responseSpeed: 3, deadlineCompletion: 3 },
-    //                 feedback: { type: "neutral", title: "", body: "" }
-    //             },
-    //             {
-    //                 label:   "Option C",
-    //                 text:    "Write option.",
-    //                 quality: "bad",
-    //                 impact:  { attendance: -5, responseSpeed: -5, deadlineCompletion: -5 },
-    //                 feedback: { type: "bad", title: "", body: "" }
-    //             }
-    //         ]
-    //     },
-
-    //     // Tom Brennan (3)
-    //     {
-    //         situation: "[WEEK 6 — Tom Brennan] Write situation here.",
-    //         options: [
-    //             {
-    //                 label:   "Option A",
-    //                 text:    "Write option.",
-    //                 quality: "good",
-    //                 impact:  { attendance: 8, responseSpeed: 8, deadlineCompletion: 8 },
-    //                 feedback: { type: "good", title: "", body: "" }
-    //             },
-    //             {
-    //                 label:   "Option B",
-    //                 text:    "Write option.",
-    //                 quality: "neutral",
-    //                 impact:  { attendance: 3, responseSpeed: 3, deadlineCompletion: 3 },
-    //                 feedback: { type: "neutral", title: "", body: "" }
-    //             },
-    //             {
-    //                 label:   "Option C",
-    //                 text:    "Write option.",
-    //                 quality: "bad",
-    //                 impact:  { attendance: -5, responseSpeed: -5, deadlineCompletion: -5 },
-    //                 feedback: { type: "bad", title: "", body: "" }
-    //             }
-    //         ]
-    //     }
-    // ],
-
-    // // ══ WEEK 7 ══════════════════════════════════════════════════
-    // [
-    //     // Angela Kim (0)
-    //     {
-    //         situation: "[WEEK 7 — Angela Kim] Write situation here.",
-    //         options: [
-    //             {
-    //                 label:   "Option A",
-    //                 text:    "Write option.",
-    //                 quality: "good",
-    //                 impact:  { attendance: 8, responseSpeed: 8, deadlineCompletion: 8 },
-    //                 feedback: { type: "good", title: "", body: "" }
-    //             },
-    //             {
-    //                 label:   "Option B",
-    //                 text:    "Write option.",
-    //                 quality: "neutral",
-    //                 impact:  { attendance: 3, responseSpeed: 3, deadlineCompletion: 3 },
-    //                 feedback: { type: "neutral", title: "", body: "" }
-    //             },
-    //             {
-    //                 label:   "Option C",
-    //                 text:    "Write option.",
-    //                 quality: "bad",
-    //                 impact:  { attendance: -5, responseSpeed: -5, deadlineCompletion: -5 },
-    //                 feedback: { type: "bad", title: "", body: "" }
-    //             }
-    //         ]
-    //     },
-
-    //     // Marcus Webb (1)
-    //     {
-    //         situation: "[WEEK 7 — Marcus Webb] Write situation here.",
-    //         options: [
-    //             {
-    //                 label:   "Option A",
-    //                 text:    "Write option.",
-    //                 quality: "good",
-    //                 impact:  { attendance: 8, responseSpeed: 8, deadlineCompletion: 8 },
-    //                 feedback: { type: "good", title: "", body: "" }
-    //             },
-    //             {
-    //                 label:   "Option B",
-    //                 text:    "Write option.",
-    //                 quality: "neutral",
-    //                 impact:  { attendance: 3, responseSpeed: 3, deadlineCompletion: 3 },
-    //                 feedback: { type: "neutral", title: "", body: "" }
-    //             },
-    //             {
-    //                 label:   "Option C",
-    //                 text:    "Write option.",
-    //                 quality: "bad",
-    //                 impact:  { attendance: -5, responseSpeed: -5, deadlineCompletion: -5 },
-    //                 feedback: { type: "bad", title: "", body: "" }
-    //             }
-    //         ]
-    //     },
-
-    //     // Priya Nair (2)
-    //     {
-    //         situation: "[WEEK 7 — Priya Nair] Write situation here.",
-    //         options: [
-    //             {
-    //                 label:   "Option A",
-    //                 text:    "Write option.",
-    //                 quality: "good",
-    //                 impact:  { attendance: 8, responseSpeed: 8, deadlineCompletion: 8 },
-    //                 feedback: { type: "good", title: "", body: "" }
-    //             },
-    //             {
-    //                 label:   "Option B",
-    //                 text:    "Write option.",
-    //                 quality: "neutral",
-    //                 impact:  { attendance: 3, responseSpeed: 3, deadlineCompletion: 3 },
-    //                 feedback: { type: "neutral", title: "", body: "" }
-    //             },
-    //             {
-    //                 label:   "Option C",
-    //                 text:    "Write option.",
-    //                 quality: "bad",
-    //                 impact:  { attendance: -5, responseSpeed: -5, deadlineCompletion: -5 },
-    //                 feedback: { type: "bad", title: "", body: "" }
-    //             }
-    //         ]
-    //     },
-
-    //     // Tom Brennan (3)
-    //     {
-    //         situation: "[WEEK 7 — Tom Brennan] Write situation here.",
-    //         options: [
-    //             {
-    //                 label:   "Option A",
-    //                 text:    "Write option.",
-    //                 quality: "good",
-    //                 impact:  { attendance: 8, responseSpeed: 8, deadlineCompletion: 8 },
-    //                 feedback: { type: "good", title: "", body: "" }
-    //             },
-    //             {
-    //                 label:   "Option B",
-    //                 text:    "Write option.",
-    //                 quality: "neutral",
-    //                 impact:  { attendance: 3, responseSpeed: 3, deadlineCompletion: 3 },
-    //                 feedback: { type: "neutral", title: "", body: "" }
-    //             },
-    //             {
-    //                 label:   "Option C",
-    //                 text:    "Write option.",
-    //                 quality: "bad",
-    //                 impact:  { attendance: -5, responseSpeed: -5, deadlineCompletion: -5 },
-    //                 feedback: { type: "bad", title: "", body: "" }
-    //             }
-    //         ]
-    //     }
-    // ],
-
-    // // ══ WEEK 8 (final) ══════════════════════════════════════════
-    // [
-    //     // Angela Kim (0)
-    //     {
-    //         situation: "[WEEK 8 — Angela Kim] Final week situation.",
-    //         options: [
-    //             {
-    //                 label:   "Option A",
-    //                 text:    "Write option.",
-    //                 quality: "good",
-    //                 impact:  { attendance: 10, responseSpeed: 10, deadlineCompletion: 10 },
-    //                 feedback: { type: "good", title: "", body: "" }
-    //             },
-    //             {
-    //                 label:   "Option B",
-    //                 text:    "Write option.",
-    //                 quality: "neutral",
-    //                 impact:  { attendance: 3, responseSpeed: 3, deadlineCompletion: 3 },
-    //                 feedback: { type: "neutral", title: "", body: "" }
-    //             },
-    //             {
-    //                 label:   "Option C",
-    //                 text:    "Write option.",
-    //                 quality: "bad",
-    //                 impact:  { attendance: -8, responseSpeed: -8, deadlineCompletion: -8 },
-    //                 feedback: { type: "bad", title: "", body: "" }
-    //             }
-    //         ]
-    //     },
-
-    //     // Marcus Webb (1)
-    //     {
-    //         situation: "[WEEK 8 — Marcus Webb] Final week situation.",
-    //         options: [
-    //             {
-    //                 label:   "Option A",
-    //                 text:    "Write option.",
-    //                 quality: "good",
-    //                 impact:  { attendance: 10, responseSpeed: 10, deadlineCompletion: 10 },
-    //                 feedback: { type: "good", title: "", body: "" }
-    //             },
-    //             {
-    //                 label:   "Option B",
-    //                 text:    "Write option.",
-    //                 quality: "neutral",
-    //                 impact:  { attendance: 3, responseSpeed: 3, deadlineCompletion: 3 },
-    //                 feedback: { type: "neutral", title: "", body: "" }
-    //             },
-    //             {
-    //                 label:   "Option C",
-    //                 text:    "Write option.",
-    //                 quality: "bad",
-    //                 impact:  { attendance: -8, responseSpeed: -8, deadlineCompletion: -8 },
-    //                 feedback: { type: "bad", title: "", body: "" }
-    //             }
-    //         ]
-    //     },
-
-    //     // Priya Nair (2)
-    //     {
-    //         situation: "[WEEK 8 — Priya Nair] Final week situation.",
-    //         options: [
-    //             {
-    //                 label:   "Option A",
-    //                 text:    "Write option.",
-    //                 quality: "good",
-    //                 impact:  { attendance: 10, responseSpeed: 10, deadlineCompletion: 10 },
-    //                 feedback: { type: "good", title: "", body: "" }
-    //             },
-    //             {
-    //                 label:   "Option B",
-    //                 text:    "Write option.",
-    //                 quality: "neutral",
-    //                 impact:  { attendance: 3, responseSpeed: 3, deadlineCompletion: 3 },
-    //                 feedback: { type: "neutral", title: "", body: "" }
-    //             },
-    //             {
-    //                 label:   "Option C",
-    //                 text:    "Write option.",
-    //                 quality: "bad",
-    //                 impact:  { attendance: -8, responseSpeed: -8, deadlineCompletion: -8 },
-    //                 feedback: { type: "bad", title: "", body: "" }
-    //             }
-    //         ]
-    //     },
-
-    //     // Tom Brennan (3)
-    //     {
-    //         situation: "[WEEK 8 — Tom Brennan] Final week situation.",
-    //         options: [
-    //             {
-    //                 label:   "Option A",
-    //                 text:    "Write option.",
-    //                 quality: "good",
-    //                 impact:  { attendance: 10, responseSpeed: 10, deadlineCompletion: 10 },
-    //                 feedback: { type: "good", title: "", body: "" }
-    //             },
-    //             {
-    //                 label:   "Option B",
-    //                 text:    "Write option.",
-    //                 quality: "neutral",
-    //                 impact:  { attendance: 3, responseSpeed: 3, deadlineCompletion: 3 },
-    //                 feedback: { type: "neutral", title: "", body: "" }
-    //             },
-    //             {
-    //                 label:   "Option C",
-    //                 text:    "Write option.",
-    //                 quality: "bad",
-    //                 impact:  { attendance: -8, responseSpeed: -8, deadlineCompletion: -8 },
-    //                 feedback: { type: "bad", title: "", body: "" }
-    //             }
-    //         ]
-    //     }
-    // ]
 
 ]; // end WEEKS
 
