@@ -1137,7 +1137,7 @@ const WEEKS = [
                     impact:  { attendance: 12, responseSpeed: 8, deadlineCompletion: 8 },
                     feedback: {
                         type:  "good",
-                        title: "Title",
+                        title: "Communuication is key",
                         body:  "Tom opened up. He feels underused. You've started building a plan together."
                     }
                 },
@@ -1148,7 +1148,7 @@ const WEEKS = [
                     impact:  { attendance: 5, responseSpeed: -5, deadlineCompletion: -5 },
                     feedback: {
                         type:  "bad",
-                        title: "Title",
+                        title: "Missed the mark",
                         body:  "Tom turns up more but becomes visibly resentful."
                     }
                 }
@@ -1234,7 +1234,7 @@ const WEEKS = [
                     feedback: {
                         type:  "good",
                         title: "Title",
-                        body:  "Marcus is juggling requests from three stakeholders with no prioritisation system. You fix that."
+                        body:  "Marcus has misunderstood one of the updated systems. After a refresher walk through, he seems more confident and very relieved."
                     }
                 },
                 {
@@ -1352,39 +1352,39 @@ const WEEKS = [
 
         // Tom Brennan (3)
         {
-            situation: "Tom was late to two client calls this week. Clients noticed. His excuse was vague. You sense he's stopped caring about the role.",
+            situation: "Tom was late to two client calls this week. Clients noticed and were unimpressed with his vague excuse. You sense he's detaching from the role, despite asking for it.",
             options: [
                 {
                     label:   "Option A",
-                    text:    "Give Tom a stretch goal — lead a project that uses his leadership experience.",
+                    text:    "Discuss reconnection options, and suggest additional training for the new role.",
                     quality: "good",
                     impact:  { attendance: 15, responseSpeed: 10, deadlineCompletion: 10 },
                     feedback: {
                         type:  "good",
-                        title: "Title",
-                        body:  "Having something to lead reignited Tom's engagement."
+                        title: "Honing skills",
+                        body:  "Revising the skills and methods associated with premium account holders helps Tom feel more confident."
                     }
                 },
                 {
                     label:   "Option B",
-                    text:    "Put him on a performance improvement plan.",
+                    text:    "Sign him up for additional training and add a 10 minute check in daily with Tom to ensure he's on track.",
                     quality: "bad",
                     impact:  { attendance: 5, responseSpeed: -5, deadlineCompletion: -5 },
                     feedback: {
                         type:  "bad",
-                        title: "Title",
-                        body:  "Tom complies but becomes hostile. Trust evaporates."
+                        title: "Micromanaged",
+                        body:  "Tom feels boxed in and scrutinised rather than supported. As a long-serving member of the team, he feels he is being underestimated and coddled rather than encouraged to succeed."
                     }
                 },
                 {
                     label:   "Option C",
-                    text:    "Ask if there's a different client account better suited to where he is right now.",
+                    text:    "Ask if there's a specific problem client that he needs help with.",
                     quality: "neutral",
                     impact:  { attendance: 5, responseSpeed: 5, deadlineCompletion: 5 },
                     feedback: {
                         type:  "neutral",
-                        title: "Title",
-                        body:  "A fresh account helps slightly. Doesn't solve the underlying loss of purpose."
+                        title: "Shifting the issue.",
+                        body:  "You have a productive discussion about some of the harder clients, but Tom doesn't identify any clients as particularly difficult to manage."
                     }
                 }
             ],
@@ -1396,8 +1396,8 @@ const WEEKS = [
                     impact:  { attendance: 10, responseSpeed: 8, deadlineCompletion: 8 },
                     feedback: {
                         type:  "good",
-                        title: "Title",
-                        body:  "Tom hears the gravity of the situation. He asks for a role review. You start one."
+                        title: "Clear comms",
+                        body:  "Tom hears the gravity of the situation. He asks for more support in some new skill areas, which you provide."
                     }
                 },
                 {
@@ -1407,7 +1407,7 @@ const WEEKS = [
                     impact:  { attendance: -5, responseSpeed: -8, deadlineCompletion: -5 },
                     feedback: {
                         type:  "bad",
-                        title: "Title",
+                        title: "Trust broken",
                         body:  "Tom feels blindsided. Any remaining trust is gone."
                     }
                 }
@@ -1483,48 +1483,60 @@ const WEEKS = [
             situation: "During a call, Marcus gives the client outdated information and struggles to answer their questions. After the call, the client requests that the company honour what Marcus had told them.",
             options: [
                 {
-                    label:   "Option A",
-                    text:    "Write option.",
-                    quality: "good",
-                    impact:  { attendance: 8, responseSpeed: 8, deadlineCompletion: 8 },
-                    feedback: { type: "good", title: "", body: "" }
-                },
-                {
                     label:   "Option B",
-                    text:    "Write option.",
+                    text:    "Handle the client correction yourself and send Marcus a written summary of what went wrong and what to do differently next time.",
                     quality: "neutral",
                     impact:  { attendance: 3, responseSpeed: 3, deadlineCompletion: 3 },
-                    feedback: { type: "neutral", title: "", body: "" }
+                    feedback: {
+                        type:  "neutral",
+                        title: "Protected but not developed",
+                        body:  "The client situation is resolved, but Marcus missed the opportunity to learn how to handle it. He is relieved, but remains unsure how to navigate similar situations."
+                    }
                 },
                 {
                     label:   "Option C",
-                    text:    "Write option.",
+                    text:    "Inform Marcus that the client complaint has been escalated and that he must not make commitments outside his authority again.",
                     quality: "bad",
-                    impact:  { attendance: -5, responseSpeed: -5, deadlineCompletion: -5 },
-                    feedback: { type: "bad", title: "", body: "" }
+                    impact:  { attendance: -5, responseSpeed: -8, deadlineCompletion: -5 },
+                    feedback: {
+                        type:  "bad",
+                        title: "Fear over growth",
+                        body:  "Marcus is already fragile, and this response confirms his fear that mistakes are career-ending. He becomes visibly hesitant on future client calls and avoids making any independent decisions."
+                    }
+                },
+                                {
+                    label:   "Option A",
+                    text:    "Meet with Marcus privately to understand what happened, then coach him on how to correct it with the client directly — with your support.",
+                    quality: "good",
+                    impact:  { attendance: 8, responseSpeed: 10, deadlineCompletion: 8 },
+                    feedback: {
+                        type:  "good",
+                        title: "Turning a mistake into a lesson",
+                        body:  "Marcus is nervous but follows through on the client correction with your guidance. He feels supported rather than blamed, and his confidence in handling difficult conversations grows."
+                    }
                 }
             ],
             crisisOptions: [
                 {
                     label:   "Crisis A",
-                    text:    "Tell Tom plainly: 'I'm going to have to escalate this if things don't change. I don't want to. What do you need?'",
+                    text:    "Sit with Marcus before the client follow-up: 'Let's figure out what happened and fix this together. I'll be with you the whole way.'",
                     quality: "good",
-                    impact:  { attendance: 10, responseSpeed: 8, deadlineCompletion: 8 },
+                    impact:  { attendance: 8, responseSpeed: 10, deadlineCompletion: 8 },
                     feedback: {
                         type:  "good",
-                        title: "Title",
-                        body:  "Tom hears the gravity of the situation. He asks for a role review. You start one."
+                        title: "Steadied by support",
+                        body:  "Marcus's stress drops significantly knowing he won't face the client alone. He handles the correction better than expected and begins to rebuild confidence."
                     }
                 },
                 {
                     label:   "Crisis B",
-                    text:    "Escalate to HR immediately without warning Tom first.",
+                    text:    "Reassign the client account to another team member to minimise further damage.",
                     quality: "bad",
                     impact:  { attendance: -5, responseSpeed: -8, deadlineCompletion: -5 },
                     feedback: {
                         type:  "bad",
-                        title: "Title",
-                        body:  "Tom feels blindsided. Any remaining trust is gone."
+                        title: "Confirmed fears",
+                        body:  "Marcus interprets the reassignment as evidence that he is not trusted or valued. His engagement drops sharply and he begins to disengage from the wider team."
                     }
                 }
             ]
@@ -1535,48 +1547,60 @@ const WEEKS = [
             situation: "While working independently on a project, Priya changed an authorised process so the project could be completed on time. Although Priya meets the deadline, the project is flagged by the leadership team, and you are asked to justify the change.",
             options: [
                 {
+                    label:   "Option C",
+                    text:    "Formally log the incident and inform Priya that deviating from approved processes is a serious issue that could affect her standing.",
+                    quality: "bad",
+                    impact:  { attendance: -5, responseSpeed: -5, deadlineCompletion: -5 },
+                    feedback: {
+                        type:  "bad",
+                        title: "Overcorrected",
+                        body:  "Priya shuts down. She had been trying to do the right thing under pressure and feels punished for it. Her willingness to take initiative - one of her strongest qualities - begins to erode."
+                    }
+                },
+                {
                     label:   "Option A",
-                    text:    "Write option.",
+                    text:    "Meet with Priya to understand why she made the change, acknowledge her initiative in meeting the deadline, and explain the importance of flagging process deviations in advance.",
                     quality: "good",
-                    impact:  { attendance: 8, responseSpeed: 8, deadlineCompletion: 8 },
-                    feedback: { type: "good", title: "", body: "" }
+                    impact:  { attendance: 8, responseSpeed: 6, deadlineCompletion: 8 },
+                    feedback: {
+                        type:  "good",
+                        title: "Accountability with respect",
+                        body:  "Priya explains she didn't feel she had time to escalate. You establish a simple escalation path together. She feels heard rather than reprimanded, and is more likely to flag issues proactively going forward."
+                    }
                 },
                 {
                     label:   "Option B",
-                    text:    "Write option.",
+                    text:    "Respond to leadership with a summary of Priya's reasoning, and remind her in writing to follow authorised processes.",
                     quality: "neutral",
                     impact:  { attendance: 3, responseSpeed: 3, deadlineCompletion: 3 },
-                    feedback: { type: "neutral", title: "", body: "" }
-                },
-                {
-                    label:   "Option C",
-                    text:    "Write option.",
-                    quality: "bad",
-                    impact:  { attendance: -5, responseSpeed: -5, deadlineCompletion: -5 },
-                    feedback: { type: "bad", title: "", body: "" }
+                    feedback: {
+                        type:  "neutral",
+                        title: "Covered, but not resolved",
+                        body:  "Leadership is satisfied for now, and Priya understands the expectation. However, the underlying issue - that she didn't feel safe escalating - hasn't been addressed."
+                    }
                 }
             ],
             crisisOptions: [
                 {
                     label:   "Crisis A",
-                    text:    "Tell Tom plainly: 'I'm going to have to escalate this if things don't change. I don't want to. What do you need?'",
+                    text:    "Speak with Priya today: 'I want to understand what happened before I respond to leadership. Can you walk me through it?'",
                     quality: "good",
-                    impact:  { attendance: 10, responseSpeed: 8, deadlineCompletion: 8 },
+                    impact:  { attendance: 8, responseSpeed: 8, deadlineCompletion: 8 },
                     feedback: {
                         type:  "good",
-                        title: "Title",
-                        body:  "Tom hears the gravity of the situation. He asks for a role review. You start one."
+                        title: "Trust before judgment",
+                        body:  "Priya explains the time pressure she was under. You respond to leadership with context, and use the conversation to agree on a clearer escalation process. Priya feels seen and supported."
                     }
                 },
                 {
                     label:   "Crisis B",
-                    text:    "Escalate to HR immediately without warning Tom first.",
-                    quality: "bad",
-                    impact:  { attendance: -5, responseSpeed: -8, deadlineCompletion: -5 },
+                    text:    "Ask Angela to speak with Priya informally about the importance of following approved processes.",
+                    quality: "neutral",
+                    impact:  { attendance: 3, responseSpeed: 3, deadlineCompletion: 0 },
                     feedback: {
-                        type:  "bad",
-                        title: "Title",
-                        body:  "Tom feels blindsided. Any remaining trust is gone."
+                        type:  "neutral",
+                        title: "Indirect and incomplete",
+                        body:  "Priya values Angela's opinion and takes the message seriously, but is confused about why the feedback didn't come from you. The issue with escalation pathways is still unresolved."
                     }
                 }
             ]
@@ -1584,44 +1608,64 @@ const WEEKS = [
 
         // Tom Brennan (3)
         {
-            situation: "Tom has noticed that one of his previous reports had made a mistake during a client call and decided to correct the mistake without informing anyone on your team.  ",
-            options: [
+            situation: "Tom has noticed that one of his previous reports had made a mistake during a client call and decided to correct the mistake without informing anyone on your team.",
+            options:  [
                 {
                     label:   "Option A",
-                    text:    "Write option.",
+                    text:    "Acknowledge that Tom handled a difficult situation well, and use it as an opening to discuss how you'd like him to loop you in on client issues going forward.",
                     quality: "good",
                     impact:  { attendance: 8, responseSpeed: 8, deadlineCompletion: 8 },
-                    feedback: { type: "good", title: "", body: "" }
-                },
-                {
-                    label:   "Option B",
-                    text:    "Write option.",
-                    quality: "neutral",
-                    impact:  { attendance: 3, responseSpeed: 3, deadlineCompletion: 3 },
-                    feedback: { type: "neutral", title: "", body: "" }
+                    feedback: {
+                        type:  "good",
+                        title: "Redirecting experience",
+                        body:  "Tom responds well to being recognised for his instincts. The conversation opens a broader discussion about how his experience can be channelled more visibly. He leaves feeling valued."
+                    }
                 },
                 {
                     label:   "Option C",
-                    text:    "Write option.",
+                    text:    "Raise the issue in a team meeting as a reminder that all client communications need to be escalated.",
                     quality: "bad",
                     impact:  { attendance: -5, responseSpeed: -5, deadlineCompletion: -5 },
-                    feedback: { type: "bad", title: "", body: "" }
+                    feedback: {
+                        type:  "bad",
+                        title: "Publicly deflated",
+                        body:  "Tom reads this as a public rebuke. He is embarrassed in front of the team and withdraws further, becoming reluctant to take initiative even when it is clearly needed."
+                    }
+                },
+                                {
+                    label:   "Option B",
+                    text:    "Email Tom to let him know that client interventions need to go through you first, and ask him to document what happened.",
+                    quality: "neutral",
+                    impact:  { attendance: 3, responseSpeed: 3, deadlineCompletion: 3 },
+                    feedback: {
+                        type:  "neutral",
+                        title: "Process without connection",
+                        body:  "Tom complies, but found the message impersonal given the circumstances. He feels his instinct to help is being treated as a procedural problem."
+                    }
                 }
             ],
             crisisOptions: [
                 {
-                    label:   "Crisis A",
-                    text:    "Write crisis option.",
-                    quality: "good",
-                    impact:  { attendance: 10, responseSpeed: 5, deadlineCompletion: 5 },
-                    feedback: { type: "good", title: "", body: "" }
+                    label:   "Crisis B",
+                    text:    "Notify the other team's manager that Tom intervened without authorisation.",
+                    quality: "neutral",
+                    impact:  { attendance: 3, responseSpeed: 0, deadlineCompletion: 3 },
+                    feedback: {
+                        type:  "neutral",
+                        title: "Technically correct",
+                        body:  "The other manager appreciates being informed, but Tom feels reported on rather than managed. He becomes more cautious and less engaged with cross-team work."
+                    }
                 },
                 {
-                    label:   "Crisis B",
-                    text:    "Write crisis option.",
-                    quality: "neutral",
-                    impact:  { attendance: 5, responseSpeed: 3, deadlineCompletion: 3 },
-                    feedback: { type: "neutral", title: "", body: "" }
+                    label:   "Crisis A",
+                    text:    "Check in with Tom directly: 'I heard you stepped in on a client issue — I want to understand what happened from your perspective.'",
+                    quality: "good",
+                    impact:  { attendance: 10, responseSpeed: 8, deadlineCompletion: 5 },
+                    feedback: {
+                        type:  "good",
+                        title: "Heard first",
+                        body:  "Tom explains he saw a problem and fixed it — as he always has. You acknowledge his instinct and use the moment to re-establish trust and clarify communication expectations going forward."
+                    }
                 }
             ]
         }
@@ -1631,28 +1675,40 @@ const WEEKS = [
     [
         // Angela Kim (0)
         {
-            situation: "final scenario",
+            situation: "Angela has been approached directly by another team's manager about a secondment opportunity. She is enthusiastic and has informally told several colleagues. You were not consulted, and her current responsibilities have no cover arranged.",
             options: [
                 {
                     label:   "Option A",
-                    text:    "Write option.",
+                    text:    "Meet with Angela to express your support for the opportunity and work together on a transition plan that ensures her current responsibilities are covered.",
                     quality: "good",
                     impact:  { attendance: 8, responseSpeed: 8, deadlineCompletion: 8 },
-                    feedback: { type: "good", title: "", body: "" }
+                    feedback: {
+                        type:  "good",
+                        title: "Supporting growth",
+                        body:  "Angela is grateful you are backing her ambitions. She takes extra care to set up her handover well, and leaves the team on strong terms with goodwill intact on both sides."
+                    }
                 },
                 {
                     label:   "Option B",
-                    text:    "Write option.",
+                    text:    "Tell Angela the timing is not right and that the secondment will need to wait until a suitable replacement is found for her tasks.",
                     quality: "neutral",
-                    impact:  { attendance: 3, responseSpeed: 3, deadlineCompletion: 3 },
-                    feedback: { type: "neutral", title: "", body: "" }
+                    impact:  { attendance: 3, responseSpeed: 0, deadlineCompletion: 3 },
+                    feedback: {
+                        type:  "neutral",
+                        title: "Delayed, not denied",
+                        body:  "Angela understands the operational concern but is disappointed, as she had already told colleagues she was going. She remains engaged but begins to look at what other opportunities may be available to her."
+                    }
                 },
                 {
                     label:   "Option C",
-                    text:    "Write option.",
+                    text:    "Inform Angela that accepting a role without consulting you first was inappropriate, and contact the other manager to pause the process.",
                     quality: "bad",
                     impact:  { attendance: -5, responseSpeed: -5, deadlineCompletion: -5 },
-                    feedback: { type: "bad", title: "", body: "" }
+                    feedback: {
+                        type:  "bad",
+                        title: "Bridge burned",
+                        body:  "Angela feels her initiative has been punished. She is frustrated that a long tenure and strong track record didn't earn her more trust. Her engagement drops and she begins to look externally."
+                    }
                 }
             ]
         },
@@ -1663,99 +1719,122 @@ const WEEKS = [
             options: [
                 {
                     label:   "Option A",
-                    text:    "Write option.",
+                    text:    "Meet with Marcus to acknowledge the feedback he received, help him identify specific and actionable areas to focus on, and reassure him of the progress he has made.",
                     quality: "good",
-                    impact:  { attendance: 8, responseSpeed: 8, deadlineCompletion: 8 },
-                    feedback: { type: "good", title: "", body: "" }
+                    impact:  { attendance: 8, responseSpeed: 10, deadlineCompletion: 8 },
+                    feedback: {
+                        type:  "good",
+                        title: "Reframing criticism",
+                        body:  "Marcus leaves the conversation with a clearer picture of what good looks like. He is still anxious, but feels significantly more supported and begins to rebuild momentum."
+                    }
                 },
                 {
                     label:   "Option B",
-                    text:    "Write option.",
+                    text:    "Encourage Marcus to seek further feedback from the leader directly to get more clarity on the concerns raised.",
                     quality: "neutral",
                     impact:  { attendance: 3, responseSpeed: 3, deadlineCompletion: 3 },
-                    feedback: { type: "neutral", title: "", body: "" }
+                    feedback: {
+                        type:  "neutral",
+                        title: "Passed along",
+                        body:  "Marcus is reluctant but follows through. The conversation with the leader is more reassuring than expected, though without your involvement he still lacks a clear improvement plan."
+                    }
                 },
                 {
                     label:   "Option C",
-                    text:    "Write option.",
+                    text:    "Let Marcus know that the feedback is something to reflect on, and check back in with him at his next scheduled review.",
                     quality: "bad",
-                    impact:  { attendance: -5, responseSpeed: -5, deadlineCompletion: -5 },
-                    feedback: { type: "bad", title: "", body: "" }
+                    impact:  { attendance: -5, responseSpeed: -8, deadlineCompletion: -5 },
+                    feedback: {
+                        type:  "bad",
+                        title: "Left to spiral",
+                        body:  "Without direction or reassurance, Marcus's anxiety compounds over the coming weeks. He becomes visibly disengaged and his performance metrics slip further."
+                    }
                 }
             ],
             crisisOptions: [
                 {
                     label:   "Crisis A",
-                    text:    "Tell Tom plainly: 'I'm going to have to escalate this if things don't change. I don't want to. What do you need?'",
+                    text:    "Check in with Marcus today: 'I heard you had a tough interaction. How are you feeling about it? Let's work through it together.'",
                     quality: "good",
-                    impact:  { attendance: 10, responseSpeed: 8, deadlineCompletion: 8 },
+                    impact:  { attendance: 10, responseSpeed: 10, deadlineCompletion: 8 },
                     feedback: {
                         type:  "good",
-                        title: "Title",
-                        body:  "Tom hears the gravity of the situation. He asks for a role review. You start one."
+                        title: "Steadied",
+                        body:  "Marcus is visibly relieved. The conversation helps him separate the vague criticism from his overall value to the team, and you leave him with concrete next steps."
                     }
                 },
                 {
                     label:   "Crisis B",
-                    text:    "Escalate to HR immediately without warning Tom first.",
-                    quality: "bad",
-                    impact:  { attendance: -5, responseSpeed: -8, deadlineCompletion: -5 },
+                    text:    "Raise the incident with the senior leader and ask them to clarify or retract the feedback they gave Marcus.",
+                    quality: "neutral",
+                    impact:  { attendance: 3, responseSpeed: 0, deadlineCompletion: 3 },
                     feedback: {
-                        type:  "bad",
-                        title: "Title",
-                        body:  "Tom feels blindsided. Any remaining trust is gone."
+                        type:  "neutral",
+                        title: "Well-meaning but risky",
+                        body:  "The leader clarifies their comments, which helps slightly. However, Marcus is now aware that an intervention happened on his behalf, which increases his concern about being seen as fragile."
                     }
                 }
             ]
         },
-
         // Priya Nair (2)
         {
             situation: "After receiving feedback for her previous project, Priya is now reluctant to work independently and is disengaged at work. When offered the opportunity to complete an important task for a client, she is resistant.",
             options: [
                 {
                     label:   "Option A",
-                    text:    "Write option.",
+                    text:    "Have a direct conversation with Priya: acknowledge the difficulty of the recent feedback, reinforce your confidence in her, and offer to check in at key points while she works through the task.",
                     quality: "good",
-                    impact:  { attendance: 8, responseSpeed: 8, deadlineCompletion: 8 },
-                    feedback: { type: "good", title: "", body: "" }
+                    impact:  { attendance: 8, responseSpeed: 8, deadlineCompletion: 10 },
+                    feedback: {
+                        type:  "good",
+                        title: "Trust rebuilt",
+                        body:  "Priya accepts the task with noticeably more confidence. Knowing you are available to review her decisions helps her work independently again without the fear of getting it wrong."
+                    }
                 },
                 {
                     label:   "Option B",
-                    text:    "Write option.",
+                    text:    "Assign the task to another team member and give Priya a lower-stakes project to help her rebuild confidence.",
                     quality: "neutral",
-                    impact:  { attendance: 3, responseSpeed: 3, deadlineCompletion: 3 },
-                    feedback: { type: "neutral", title: "", body: "" }
+                    impact:  { attendance: 3, responseSpeed: 3, deadlineCompletion: 0 },
+                    feedback: {
+                        type:  "neutral",
+                        title: "Safe but stagnating",
+                        body:  "Priya is relieved in the short term, but the avoidance reinforces her hesitance. She doesn't regain her footing and the pattern of disengagement continues."
+                    }
                 },
                 {
                     label:   "Option C",
-                    text:    "Write option.",
+                    text:    "Tell Priya that the task is non-negotiable and that you expect her to complete it to her usual standard.",
                     quality: "bad",
                     impact:  { attendance: -5, responseSpeed: -5, deadlineCompletion: -5 },
-                    feedback: { type: "bad", title: "", body: "" }
+                    feedback: {
+                        type:  "bad",
+                        title: "Unheard",
+                        body:  "Priya complies, but feels unsupported and dismissed. Her disengagement deepens and the quality of her output suffers as a result."
+                    }
                 }
             ],
             crisisOptions: [
                 {
                     label:   "Crisis A",
-                    text:    "Tell Tom plainly: 'I'm going to have to escalate this if things don't change. I don't want to. What do you need?'",
+                    text:    "Schedule time with Priya today: 'I want to check in before we talk about work — how are you doing since the last project?'",
                     quality: "good",
-                    impact:  { attendance: 10, responseSpeed: 8, deadlineCompletion: 8 },
+                    impact:  { attendance: 10, responseSpeed: 8, deadlineCompletion: 10 },
                     feedback: {
                         type:  "good",
-                        title: "Title",
-                        body:  "Tom hears the gravity of the situation. He asks for a role review. You start one."
+                        title: "The conversation she needed",
+                        body:  "Priya was waiting to be asked. She shares her concerns openly, you address them directly, and she approaches the new task with renewed focus and trust in the process."
                     }
                 },
                 {
                     label:   "Crisis B",
-                    text:    "Escalate to HR immediately without warning Tom first.",
-                    quality: "bad",
-                    impact:  { attendance: -5, responseSpeed: -8, deadlineCompletion: -5 },
+                    text:    "Pair Priya with Angela on the task to reduce her independent exposure while she recovers confidence.",
+                    quality: "neutral",
+                    impact:  { attendance: 5, responseSpeed: 5, deadlineCompletion: 5 },
                     feedback: {
-                        type:  "bad",
-                        title: "Title",
-                        body:  "Tom feels blindsided. Any remaining trust is gone."
+                        type:  "neutral",
+                        title: "Supported but dependent",
+                        body:  "The pairing helps Priya complete the task well, but she remains reliant on external reassurance. The root cause — her fear of unilateral decisions — is not yet addressed."
                     }
                 }
             ]
@@ -1767,53 +1846,64 @@ const WEEKS = [
             options: [
                 {
                     label:   "Option A",
-                    text:    "Write option.",
+                    text:    "Meet with Tom before the client call to help him prepare. Frame it as collaboration: 'Let's think through this together so you go in feeling ready.'",
                     quality: "good",
-                    impact:  { attendance: 8, responseSpeed: 8, deadlineCompletion: 8 },
-                    feedback: { type: "good", title: "", body: "" }
+                    impact:  { attendance: 8, responseSpeed: 8, deadlineCompletion: 10 },
+                    feedback: {
+                        type:  "good",
+                        title: "Prepared and present",
+                        body:  "Tom goes into the meeting with a clear plan and noticeably more composure. The call goes well, and the reduction in pressure has a positive knock-on effect on his other client relationships."
+                    }
                 },
                 {
                     label:   "Option B",
-                    text:    "Write option.",
+                    text:    "Offer to join the client call yourself as a senior presence, taking the lead if needed.",
                     quality: "neutral",
                     impact:  { attendance: 3, responseSpeed: 3, deadlineCompletion: 3 },
-                    feedback: { type: "neutral", title: "", body: "" }
+                    feedback: {
+                        type:  "neutral",
+                        title: "Covered, not confident",
+                        body:  "The call goes smoothly, but Tom feels his competence has been quietly overridden. He is grateful for the support but less confident heading into future high-stakes meetings."
+                    }
                 },
                 {
                     label:   "Option C",
-                    text:    "Write option.",
+                    text:    "Remind Tom of the importance of this client and the expectations around performance going into the meeting.",
                     quality: "bad",
                     impact:  { attendance: -5, responseSpeed: -5, deadlineCompletion: -5 },
-                    feedback: { type: "bad", title: "", body: "" }
+                    feedback: {
+                        type:  "bad",
+                        title: "Pressure compounded",
+                        body:  "The reminder increases Tom's anxiety without providing any practical support. He goes into the meeting more wound up than before, and it shows. The client raises concerns afterwards."
+                    }
                 }
             ],
             crisisOptions: [
                 {
                     label:   "Crisis A",
-                    text:    "Tell Tom plainly: 'I'm going to have to escalate this if things don't change. I don't want to. What do you need?'",
+                    text:    "Sit down with Tom today: 'I can see this meeting is weighing on you. Let's spend an hour making sure you feel prepared and confident going in.'",
                     quality: "good",
-                    impact:  { attendance: 10, responseSpeed: 8, deadlineCompletion: 8 },
+                    impact:  { attendance: 10, responseSpeed: 8, deadlineCompletion: 10 },
                     feedback: {
                         type:  "good",
-                        title: "Title",
-                        body:  "Tom hears the gravity of the situation. He asks for a role review. You start one."
+                        title: "Back on solid ground",
+                        body:  "Tom is visibly steadied by the preparation session. He handles the client meeting well and reports feeling more like himself afterwards. It marks a turning point in his engagement."
                     }
                 },
                 {
                     label:   "Crisis B",
-                    text:    "Escalate to HR immediately without warning Tom first.",
-                    quality: "bad",
-                    impact:  { attendance: -5, responseSpeed: -8, deadlineCompletion: -5 },
+                    text:    "Reassign the client to a colleague to relieve the pressure and give Tom time to stabilise.",
+                    quality: "neutral",
+                    impact:  { attendance: 3, responseSpeed: 0, deadlineCompletion: 3 },
                     feedback: {
-                        type:  "bad",
-                        title: "Title",
-                        body:  "Tom feels blindsided. Any remaining trust is gone."
+                        type:  "neutral",
+                        title: "Relief without resolution",
+                        body:  "Tom is relieved in the short term, but interprets the reassignment as a signal that you don't think he can handle the role. His confidence in his position drops further."
                     }
                 }
             ]
         }
     ]
-
 ]; // end WEEKS
 
 
